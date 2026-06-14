@@ -225,16 +225,15 @@
         if (!isKey && !isChord) continue;
         const y = fretY(f);
         if (isKey) {
-          // scale-key root (tonal home) — muted gold hollow diamond
+          // scale-key root (tonal home) — neutral gray hollow diamond
           g.appendChild(el('path', {
-            d: diamond(x, y, 6), fill: 'none', stroke: '#f5b94a',
-            'stroke-width': 1.2, opacity: 0.34
+            d: diamond(x, y, 5.5), fill: 'none', stroke: '#737d92',
+            'stroke-width': 1.2, opacity: 0.5
           }));
         } else {
-          // chord root — muted slate-teal hollow ring
+          // chord root — neutral gray filled dot (no ring)
           g.appendChild(el('circle', {
-            cx: x, cy: y, r: 5.2, fill: 'none', stroke: '#5eead4',
-            'stroke-width': 1.2, opacity: 0.26
+            cx: x, cy: y, r: 3, fill: '#5b6478', opacity: 0.55
           }));
         }
       }
@@ -292,11 +291,12 @@
       const cy = fretY(n.fretRel);
       const r = lead ? 15 : 13;
 
-      // glow halo for root / lead
-      if (n.isRoot) {
+      // ring the three notes of the chord ACTUALLY being played (lead voicing)
+      if (lead) {
         g.appendChild(el('circle', {
-          cx, cy, r: r + 7, fill: 'none', stroke: 'var(--root, #ffd479)',
-          'stroke-width': 1.4, opacity: 0.55 * baseOpacity, filter: 'url(#glow)'
+          cx, cy, r: r + 6, fill: 'none',
+          stroke: n.isRoot ? '#ffd479' : (n.outside ? '#ff9d5c' : '#5eead4'),
+          'stroke-width': 1.6, opacity: 0.8, filter: 'url(#glow)'
         }));
       }
 
