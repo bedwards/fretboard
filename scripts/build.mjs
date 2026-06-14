@@ -55,7 +55,7 @@ ${css}
     <div id="stage-mount"></div>
   </div>
 
-  <footer class="hint">strings vertical · frets horizontal · 12-fret relative window · no fret numbers</footer>
+  <footer class="hint"><a href="https://jalopy.music" target="_blank" rel="noopener">jalopy.music</a></footer>
 </div>
 
 <script type="module">

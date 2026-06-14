@@ -252,3 +252,6 @@ footer.hint {
   .controls { justify-content: space-between; }
   .legend { display: none; }
 }
+
+.hint a { color: var(--neon-2); text-decoration: none; letter-spacing: .08em; }
+.hint a:hover { text-decoration: underline; }
