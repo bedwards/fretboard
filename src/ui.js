@@ -494,6 +494,11 @@
       this.mount = document.getElementById(mountId);
       // SPEC §9: database always built full
       this.db = window.Fretboard.build({ fourNote: true, viiMajor: true });
+      // first load = a RANDOM progression at the lowest chaos (most common).
+      // The engine stays deterministic per seed; we just randomise the starting
+      // seed at boot. Every shuffle increments from here.
+      this.seed = (Math.random() * 0x7fffffff) >>> 0;
+      this.chaos = 0;
       this.wireControls();
       this.draw();
     },
