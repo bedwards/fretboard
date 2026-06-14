@@ -1,0 +1,245 @@
+/* =============================================================================
+ *  Fretboard — dark / slick / vibey theme
+ *  Deep near-black backdrop, subtle gradients, soft neon glow on active notes.
+ * ========================================================================== */
+
+:root {
+  /* palette */
+  --bg-0:        #07080c;   /* deepest backdrop */
+  --bg-1:        #0c0e15;   /* panel ground */
+  --bg-2:        #11141d;   /* raised surface */
+  --line:        #1c2130;   /* fret/string lines */
+  --line-soft:   #161a26;
+  --ink:         #e8ecf5;   /* primary text */
+  --ink-dim:     #8a93a8;   /* secondary text */
+  --ink-faint:   #4a5266;
+
+  /* neon accents */
+  --neon:        #5eead4;   /* teal — primary glow */
+  --neon-2:      #7c9cff;   /* periwinkle */
+  --root:        #ffd479;   /* warm gold — root notes */
+  --amber:       #ff9d5c;   /* outside note */
+  --hammer:      #5eead4;   /* articulation: hammer */
+  --pull:        #c08cff;   /* pull-off */
+  --slide:       #7c9cff;   /* slide */
+  --bend:        #ff7eb6;   /* bend */
+  --pivot:       #39415a;   /* held / barre string */
+
+  --shadow-glow: 0 0 18px;
+  --ease:        cubic-bezier(.22,.61,.36,1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background:
+    radial-gradient(1200px 700px at 18% -10%, #12182a 0%, transparent 55%),
+    radial-gradient(1100px 800px at 100% 0%, #160f22 0%, transparent 50%),
+    linear-gradient(180deg, #06070b 0%, #090b11 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.app {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 30px 28px 56px;
+}
+
+/* ----------------------------------------------------------------- header -- */
+.app-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.brand { display: flex; flex-direction: column; gap: 4px; }
+.brand h1 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: linear-gradient(92deg, var(--neon), var(--neon-2) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.brand .sub {
+  font-size: 11.5px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* --------------------------------------------------------------- controls -- */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.chaos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 16px;
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+}
+.chaos label {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.chaos .val {
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  color: var(--neon);
+  min-width: 28px;
+  text-align: right;
+  text-shadow: 0 0 10px rgba(94,234,212,.4);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 132px;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--neon) 0%, var(--neon-2) 100%);
+  outline: none;
+  opacity: .9;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #0c0e15;
+  border: 2px solid var(--neon);
+  box-shadow: 0 0 12px rgba(94,234,212,.7);
+  cursor: pointer;
+  transition: transform .15s var(--ease), box-shadow .15s var(--ease);
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.18); box-shadow: 0 0 18px rgba(94,234,212,.9); }
+input[type="range"]::-moz-range-thumb {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #0c0e15; border: 2px solid var(--neon);
+  box-shadow: 0 0 12px rgba(94,234,212,.7); cursor: pointer;
+}
+
+.shuffle {
+  position: relative;
+  padding: 11px 22px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #06120f;
+  background: linear-gradient(180deg, #6ff3dd, #45c9b6);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(94,234,212,.4), 0 8px 26px -8px rgba(94,234,212,.55);
+  transition: transform .14s var(--ease), box-shadow .2s var(--ease), filter .2s;
+}
+.shuffle:hover { transform: translateY(-1px); filter: brightness(1.06); box-shadow: 0 0 0 1px rgba(94,234,212,.6), 0 12px 32px -8px rgba(94,234,212,.7); }
+.shuffle:active { transform: translateY(0) scale(.98); }
+
+/* ------------------------------------------------------------- meta strip -- */
+.meta-strip {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+  font-size: 11.5px;
+  letter-spacing: .04em;
+  color: var(--ink-dim);
+}
+.meta-strip .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.meta-strip .chip b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.meta-strip .seq { color: var(--neon-2); letter-spacing: .12em; }
+.meta-strip .commonness-bar {
+  position: relative; width: 90px; height: 5px; border-radius: 4px;
+  background: var(--line); overflow: hidden;
+}
+.meta-strip .commonness-bar i {
+  position: absolute; inset: 0; transform-origin: left;
+  background: linear-gradient(90deg, var(--neon), var(--neon-2));
+  box-shadow: 0 0 10px rgba(94,234,212,.5);
+  transition: transform .5s var(--ease);
+}
+
+/* legend */
+.legend { display: flex; gap: 16px; margin-left: auto; flex-wrap: wrap; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; color: var(--ink-faint); letter-spacing: .06em; }
+.legend .sw { width: 11px; height: 11px; border-radius: 50%; }
+
+/* ----------------------------------------------------------------- stage -- */
+.stage-wrap {
+  background: linear-gradient(180deg, rgba(18,21,31,.55), rgba(9,11,17,.35));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 30px 80px -40px rgba(0,0,0,.9);
+}
+#stage { display: block; width: 100%; height: auto; border-radius: 14px; }
+
+/* svg-level styling hooks */
+.panel-label {
+  font: 600 12px "Inter", system-ui, sans-serif;
+  letter-spacing: .14em;
+  fill: var(--ink-dim);
+  text-transform: uppercase;
+}
+.note-pair { font: 600 9.5px "Inter", system-ui, sans-serif; letter-spacing: .01em; }
+
+.fade-in { animation: fadeIn .55s var(--ease) both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* note pop-in on shuffle — staggered via inline animation-delay */
+.note-grp { animation: notePop .5s var(--ease) both; }
+@keyframes notePop {
+  0%   { opacity: 0; transform: translateY(6px) scale(.6); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.arrow-grp { animation: arrowDraw .6s var(--ease) both; }
+@keyframes arrowDraw { from { opacity: 0; } to { opacity: 1; } }
+
+footer.hint {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 760px) {
+  .app-head { flex-direction: column; align-items: stretch; gap: 16px; }
+  .controls { justify-content: space-between; }
+  .legend { display: none; }
+}
