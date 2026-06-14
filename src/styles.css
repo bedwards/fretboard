@@ -219,6 +219,12 @@ input[type="range"]::-moz-range-thumb {
   text-transform: uppercase;
 }
 .note-pair { font: 600 9.5px "Inter", system-ui, sans-serif; letter-spacing: .01em; }
+.panel-degree {
+  font: 700 23px "Inter", system-ui, sans-serif;
+  letter-spacing: .04em;
+  fill: var(--neon-2);
+  paint-order: stroke;
+}
 
 .fade-in { animation: fadeIn .55s var(--ease) both; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

@@ -49,17 +49,6 @@ ${css}
       common
       <span class="commonness-bar"><i id="commonBar" style="transform:scaleX(0)"></i></span>
     </span>
-    <div class="legend">
-      <span><i class="sw" style="background:#f5b94a"></i>root</span>
-      <span><i class="sw" style="background:#2bbfa8"></i>note</span>
-      <span><i class="sw" style="background:#ff8a45"></i>outside</span>
-      <span><i class="sw mk-key"></i>key</span>
-      <span><i class="sw mk-chord"></i>chord root</span>
-      <span><i class="sw" style="background:#5eead4"></i>⌒↑</span>
-      <span><i class="sw" style="background:#c08cff"></i>⌣↓</span>
-      <span><i class="sw" style="background:#7c9cff"></i>∕</span>
-      <span><i class="sw" style="background:#ff7eb6"></i>↝</span>
-    </div>
   </div>
 
   <div class="stage-wrap">

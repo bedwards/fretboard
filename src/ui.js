@@ -31,7 +31,7 @@
 
   // ---- layout geometry (all in svg user units) ----------------------------
   const PANEL_W = 232;              // width of one fretboard panel
-  const GUTTER  = 92;               // gap between panels (room for arrows)
+  const GUTTER  = 44;               // gap between panels (boards sit close together)
   const PAD_X   = 26;
   const TOP     = 58;               // headroom for panel labels
   const BOARD_H = 540;              // height of the 12-fret board
@@ -94,8 +94,12 @@
 
   function buildBoard(prog) {
     const root = el('g');
-    const ss = prog.stringSet; // [hi,mid,lo]
-    const active = new Set(ss);
+    // three stacked layers so articulation arrows always sit ABOVE the boards
+    // but BEHIND the note bubbles — they never paint over a note (§ user req).
+    const boards = el('g', { class: 'layer-boards' });
+    const arrows = el('g', { class: 'layer-arrows' });
+    const notes  = el('g', { class: 'layer-notes' });
+    const active = new Set(prog.stringSet);
 
     for (let p = 0; p < 4; p++) {
       const px = panelX(p);
@@ -139,33 +143,40 @@
         }
       }
 
-      // the three voicings for this panel
       const voicings = panelVoicingsFor(prog, p);
 
-      // background anchor markers: EVERY occurrence of the scale-key root and the
-      // current chord's root across all 6 strings of this 12-fret window, muted
-      // unless the position is part of one of the displayed voicings (§9).
+      // background anchor markers (key-root + chord-root, muted) + position guides
       drawBackgroundMarkers(g, px, prog, voicings);
-
-      // within-panel position connectors (dim guide lines between the 3 voicings
-      // on the same string, showing the up-neck shift distance == real deltas)
       drawWithinConnectors(g, px, voicings);
+      boards.appendChild(g);
 
-      // draw each voicing
-      voicings.forEach((v, vi) => drawVoicing(g, px, v, vi, voicings.length));
+      // the chord degree of THIS panel, above its board
+      drawPanelDegree(notes, px, prog.chords[p]);
 
-      root.appendChild(g);
+      // note bubbles -> NOTES layer (top); within-voicing slurs -> ARROWS layer
+      voicings.forEach((v, vi) => drawVoicing(notes, px, v, vi, voicings.length));
+      voicings.forEach((v, vi) => drawWithinArticulations(arrows, px, v, vi === 0 ? 1 : 0.66));
     }
 
-    // cross-panel transition arrows (between chosen voicings)
+    // cross-panel transition arrows (between chosen voicings) -> ARROWS layer
     for (let t = 0; t < 3; t++) {
-      const tr = prog.transitions[t];
-      const fromV = chosenVoicing(prog, t);
-      const toV   = chosenVoicing(prog, t + 1);
-      drawTransition(root, t, tr, fromV, toV);
+      drawTransition(arrows, t, prog.transitions[t], chosenVoicing(prog, t), chosenVoicing(prog, t + 1));
     }
 
+    root.appendChild(boards);
+    root.appendChild(arrows);
+    root.appendChild(notes);
     return root;
+  }
+
+  // big chord-degree label centered above each panel (e.g. 5 · 1 · 5 · VII)
+  function drawPanelDegree(parent, px, degree) {
+    const t = el('text', {
+      x: px + PANEL_W / 2, y: TOP - 22, 'text-anchor': 'middle',
+      'dominant-baseline': 'middle', class: 'panel-degree'
+    });
+    t.appendChild(document.createTextNode(degSym(degree)));
+    parent.appendChild(t);
   }
 
   // chosen voicing per slot = first of panelVoicings, falling back to prog.voicings
@@ -315,8 +326,8 @@
       g.appendChild(txt);
     });
 
-    // within-voicing articulation: detect a same-string slot partner one fret away
-    drawWithinArticulations(g, px, v, baseOpacity);
+    // (within-voicing articulation slurs are drawn into the ARROWS layer so they
+    // sit behind the note bubbles — see buildBoard)
 
     parent.appendChild(g);
   }
@@ -364,12 +375,13 @@
     // one connecting strand per active string between the two panels.
     // GEOMETRIC FIDELITY: y endpoints are the real fret positions, so the
     // vertical component of each arrow == the real fret delta.
+    const EDGE = 16; // attach at the bubble edge, never the centre — stays clear of notes
     const strings = fromV.stringSet;
     strings.forEach(s => {
       const yF = fretY(fFret[s]);
       const yT = fretY(tFret[s]);
-      const x1 = stringX(fromPx, s);
-      const x2 = stringX(toPx, s);
+      const x1 = stringX(fromPx, s) + EDGE;
+      const x2 = stringX(toPx, s) - EDGE;
       const held = pivots.has(s) || (fFret[s] === tFret[s]);
 
       if (held) {
@@ -400,26 +412,6 @@
         'marker-end': marker, 'stroke-linecap': 'round'
       }));
     });
-
-    // articulation indicator at midpoint of the gutter — SYMBOL ONLY (no words):
-    // a small colored glyph keyed to articulation type; ⚡ flags slide-into-hammer.
-    const midX = (panelX(tIndex) + PANEL_W + panelX(tIndex + 1)) / 2;
-    const badgeY = TOP - 22;
-    const dirUp = tr.direction === 'up';
-    const glyph = ART_GLYPH[tr.articulation && tr.articulation.type] || '→';
-    const sym = (tr.slideIntoHammer ? '⚡' : '') + glyph + (dirUp ? '↑' : '↓');
-    const badge = el('g', {});
-    badge.appendChild(el('circle', {
-      cx: midX, cy: badgeY, r: 12,
-      fill: 'rgba(10,13,20,.82)', stroke: color, 'stroke-width': 1.2, opacity: 0.95
-    }));
-    const bt = el('text', {
-      x: midX, y: badgeY + 0.5, 'text-anchor': 'middle', 'dominant-baseline': 'central',
-      fill: color, style: 'font:600 11px system-ui'
-    });
-    bt.appendChild(document.createTextNode(sym));
-    badge.appendChild(bt);
-    g.appendChild(badge);
 
     parent.appendChild(g);
   }
@@ -546,7 +538,7 @@
       if (seq) {
         seq.textContent = prog.chords.map(c => degSym(c)).join('  →  ');
       }
-      if (ssEl) ssEl.textContent = prog.stringSet.join('-');
+      if (ssEl) ssEl.textContent = prog.stringSet.slice().reverse().join('-');
       if (seedEl) seedEl.textContent = this.seed;
       if (cb) cb.style.transform = 'scaleX(' + (prog.commonness || 0) + ')';
     }
