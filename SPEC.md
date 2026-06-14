@@ -220,6 +220,15 @@ Fretboard.label(note, key) -> { pair:[keyDeg, chordInt], outside }
 Determinism guarantee: `build(opts)` and any `(seed,chaos)` draw are pure functions — identical inputs
 → byte-identical output (basis of regression snapshots).
 
+**Coverage guarantee:** `build()` is **exhaustive** — it enumerates *every* valid combination, no
+sampling, no silent caps: all chord roots `{1..6}` + VII-major; for each, every in-key
+third/fifth/seventh slot combination (3-note and 4-note drop-forms); every one of the four adjacent
+three-string sets; **every inversion** (all PC→string assignments) within the 12-fret window; and
+**every valid same-string-set transition** between voicings. `meta` carries the enumerated counts.
+The chaos slider at `chaos=1` draws uniformly across this entire covered space, so nothing in the
+database is unreachable. A coverage test (§10) asserts the counts equal the independently-computed
+expected totals and that no root/string-set/inversion/voicing-size/transition class is missing.
+
 ---
 
 ## 9. UI / UX
@@ -227,18 +236,23 @@ Determinism guarantee: `build(opts)` and any `(seed,chaos)` draw are pure functi
 - **Layout**: four fretboard panels in a frame, left→right = chords 1..4, with transition **arrows**
   between panels (moving notes drawn as arrows colored by articulation type, arrowhead = direction;
   pivot/barre strings dimmed/held).
-- **Fretboard**: strings run **vertically**; frets are horizontal; **no fret numbers** (relative).
-  Each panel shows the shared fret neighborhood. Vertical scroll moves along the neck **one fret at a
-  time, smooth, infinite** (12-fret periodic) — panels scroll in sync; voicings re-tile so the active
-  cluster stays in frame.
+- **Fretboard**: strings run **vertically**; frets are horizontal; **no fret numbers at all**
+  (fully relative). Each panel is a **static 12-fret window — no scrolling**. Twelve frets is one full
+  octave of the relative neck, so every pitch class appears exactly once per string and all voicings
+  fit; there is nothing off-screen to scroll to. Panels are fixed.
+- **Geometric fidelity (required)**: every note is drawn at its **true fret index** inside the 12-fret
+  window. The on-screen distance between the three voicings of a chord, each voicing's internal spread,
+  and the movement drawn by every transition arrow **must equal the real fret deltas** — positions are
+  computed directly from `fretRel`, never schematically nudged. Fret rows are evenly spaced (each panel
+  shares one identical fret-row grid) so distances are visually comparable across all four panels.
 - **Notes**: filled dot per note with the `keyDeg·chordInt` pair; root emphasized (ring); outside note
   marked (dashed/amber). Within-voicing articulation shown as a small same-string arc/arrow.
-- **Controls (minimal, "less is more", no tutorial)**:
+- **Controls (only two — "less is more", no tutorial, no key selector, no toggles)**:
   - **Shuffle** button → new progression (increments seed).
   - **Chaos** slider 0–1.
-  - **3-note / 4-note** toggle.
-  - **VII-major / expanded** toggle.
-  - **Key** selector (relabels only; default off/relative).
+  The database is **always built full** (`{fourNote:true, viiMajor:true}`) so 3-note, 4-note, and the
+  VII-as-major chord all live in one draw pool; their **commonness weights** (4-note and VII-major
+  lower) make them rare at low chaos and common at high chaos. No other UI.
 - **Aesthetic**: dark, slick, vibey — deep background, subtle gradients, soft glow on active notes,
   smooth 60fps scroll & transitions. Canvas or SVG; deterministic layout.
 
