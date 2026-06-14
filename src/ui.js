@@ -494,12 +494,21 @@
       this.mount = document.getElementById(mountId);
       // SPEC §9: database always built full
       this.db = window.Fretboard.build({ fourNote: true, viiMajor: true });
-      // first load = a RANDOM progression at the lowest chaos (most common).
-      // The engine stays deterministic per seed; we just randomise the starting
-      // seed at boot. Every shuffle increments from here.
-      this.seed = (Math.random() * 0x7fffffff) >>> 0;
-      this.chaos = 0;
+      // A progression is fully determined by (seed, chaos) — the engine is pure.
+      // So a URL like ?seed=1244134585&chaos=0 reproduces an exact favorite and
+      // is bookmarkable. If no seed in the URL, first load is a RANDOM progression
+      // at the lowest chaos (most common).
+      const u = new URLSearchParams(location.search);
+      const us = parseInt(u.get('seed'), 10);
+      const uc = parseFloat(u.get('chaos'));
+      this.seed = Number.isFinite(us) ? (us >>> 0) : ((Math.random() * 0x7fffffff) >>> 0);
+      this.chaos = Number.isFinite(uc) ? Math.min(1, Math.max(0, uc)) : 0;
       this.wireControls();
+      // reflect the active chaos on the existing slider (no new UI)
+      const cs = document.getElementById('chaos');
+      const cv = document.getElementById('chaosVal');
+      if (cs) cs.value = Math.round(this.chaos * 100);
+      if (cv) cv.textContent = this.chaos.toFixed(2);
       this.draw();
     },
 
@@ -518,10 +527,17 @@
       });
     },
 
+    // mirror current (seed, chaos) into the URL so any state is bookmarkable.
+    syncURL() {
+      const qs = '?seed=' + this.seed + '&chaos=' + this.chaos;
+      history.replaceState(null, '', qs);
+    },
+
     draw() {
       this.prog = window.Fretboard.progression(this.db, { chaos: this.chaos, seed: this.seed });
       this.render(this.prog);
       this.renderMeta(this.prog);
+      this.syncURL();
     },
 
     render(prog) {
