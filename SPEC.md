@@ -240,6 +240,13 @@ expected totals and that no root/string-set/inversion/voicing-size/transition cl
   (fully relative). Each panel is a **static 12-fret window — no scrolling**. Twelve frets is one full
   octave of the relative neck, so every pitch class appears exactly once per string and all voicings
   fit; there is nothing off-screen to scroll to. Panels are fixed.
+- **Strings (required)**: draw **all six strings on every panel** — the three active strings of the
+  voicing's string set rendered bright/prominent, the other three faint/dimmed — so it is always clear
+  which three strings the voicing sits on. (Six vertical lines per panel.)
+- **No panel titles**: do **not** label panels "Chord 1/2/3/4" (or any generic chord caption).
+- **No articulation words**: never print "hammer"/"pull"/"slide" as text. Articulations are shown
+  purely as visual marks — same-string slur arcs, transition arrows, directional arrowheads, the
+  slide-into-hammer flag glyph. Symbols only.
 - **Geometric fidelity (required)**: every note is drawn at its **true fret index** inside the 12-fret
   window. The on-screen distance between the three voicings of a chord, each voicing's internal spread,
   and the movement drawn by every transition arrow **must equal the real fret deltas** — positions are
