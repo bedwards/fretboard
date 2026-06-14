@@ -247,6 +247,13 @@ expected totals and that no root/string-set/inversion/voicing-size/transition cl
   shares one identical fret-row grid) so distances are visually comparable across all four panels.
 - **Notes**: filled dot per note with the `keyDeg·chordInt` pair; root emphasized (ring); outside note
   marked (dashed/amber). Within-voicing articulation shown as a small same-string arc/arrow.
+- **Background root markers (required)**: in every panel, mark **every occurrence** within the 12-fret
+  window of (a) the **scale-key root** (key degree `1`) and (b) the **current chord's root** — on all
+  shown strings, at *every* fret where they fall, even when not part of any of the three voicings.
+  These background marks are rendered **muted/dimmed and visually distinct** (e.g. hollow/low-opacity,
+  key-root vs chord-root differentiated) so the player always sees the tonal anchors. When such a
+  position *is* part of one of the three displayed voicings, it renders in its full active style
+  instead of muted. Key-root and chord-root markers are styled differently from each other.
 - **Controls (only two — "less is more", no tutorial, no key selector, no toggles)**:
   - **Shuffle** button → new progression (increments seed).
   - **Chaos** slider 0–1.
