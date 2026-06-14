@@ -203,7 +203,7 @@
       },
       {
         "articulationTargets": [],
-        "commonnessBase": 0.45,
+        "commonnessBase": 0.3,
         "id": "c:2:tri:3",
         "kind": "triad",
         "members": [
@@ -247,7 +247,7 @@
             "slot": "third"
           }
         ],
-        "commonnessBase": 0.27,
+        "commonnessBase": 0.18,
         "id": "c:2:drop3:10",
         "kind": "drop3",
         "members": [
@@ -284,7 +284,7 @@
       },
       {
         "articulationTargets": [],
-        "commonnessBase": 0.4,
+        "commonnessBase": 0.22,
         "id": "c:3:tri:3",
         "kind": "triad",
         "members": [
@@ -334,7 +334,7 @@
             "slot": "seventh"
           }
         ],
-        "commonnessBase": 0.24,
+        "commonnessBase": 0.132,
         "id": "c:3:drop3:10",
         "kind": "drop3",
         "members": [
@@ -384,7 +384,7 @@
             "slot": "seventh"
           }
         ],
-        "commonnessBase": 0.24,
+        "commonnessBase": 0.132,
         "id": "c:3:drop3:11",
         "kind": "drop3",
         "members": [
@@ -421,7 +421,7 @@
       },
       {
         "articulationTargets": [],
-        "commonnessBase": 0.9,
+        "commonnessBase": 0.85,
         "id": "c:4:tri:4",
         "kind": "triad",
         "members": [
@@ -471,7 +471,7 @@
             "slot": "seventh"
           }
         ],
-        "commonnessBase": 0.54,
+        "commonnessBase": 0.51,
         "id": "c:4:drop3:10",
         "kind": "drop3",
         "members": [
@@ -521,7 +521,7 @@
             "slot": "seventh"
           }
         ],
-        "commonnessBase": 0.54,
+        "commonnessBase": 0.51,
         "id": "c:4:drop3:11",
         "kind": "drop3",
         "members": [
@@ -565,7 +565,7 @@
             "slot": "third"
           }
         ],
-        "commonnessBase": 0.95,
+        "commonnessBase": 0.88,
         "id": "c:5:tri:3",
         "kind": "triad",
         "members": [
@@ -609,7 +609,7 @@
             "slot": "third"
           }
         ],
-        "commonnessBase": 0.95,
+        "commonnessBase": 0.88,
         "id": "c:5:tri:4",
         "kind": "triad",
         "members": [
@@ -659,7 +659,7 @@
             "slot": "third"
           }
         ],
-        "commonnessBase": 0.57,
+        "commonnessBase": 0.528,
         "id": "c:5:drop3:10",
         "kind": "drop3",
         "members": [
@@ -696,7 +696,7 @@
       },
       {
         "articulationTargets": [],
-        "commonnessBase": 0.8,
+        "commonnessBase": 0.62,
         "id": "c:6:tri:3",
         "kind": "triad",
         "members": [
@@ -740,7 +740,7 @@
             "slot": "third"
           }
         ],
-        "commonnessBase": 0.48,
+        "commonnessBase": 0.372,
         "id": "c:6:drop3:10",
         "kind": "drop3",
         "members": [
@@ -777,7 +777,7 @@
       },
       {
         "articulationTargets": [],
-        "commonnessBase": 0.15,
+        "commonnessBase": 0.18,
         "id": "c:VII:tri:4",
         "kind": "viiMajor",
         "members": [
@@ -55981,7 +55981,7 @@
         "articulations": [],
         "barre": 10,
         "chordId": "c:2:tri:3",
-        "commonness": 0.6435,
+        "commonness": 0.429,
         "fingerScore": 1,
         "id": "v34",
         "kind": "triad",
@@ -56036,7 +56036,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:tri:3",
-        "commonness": 0.4875,
+        "commonness": 0.325,
         "fingerScore": 0.5,
         "id": "v35",
         "kind": "triad",
@@ -56091,7 +56091,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:tri:3",
-        "commonness": 0.4875,
+        "commonness": 0.325,
         "fingerScore": 0.5,
         "id": "v36",
         "kind": "triad",
@@ -56146,7 +56146,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:tri:3",
-        "commonness": 0.525,
+        "commonness": 0.35,
         "fingerScore": 0.75,
         "id": "v37",
         "kind": "triad",
@@ -56201,7 +56201,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:tri:3",
-        "commonness": 0.525,
+        "commonness": 0.35,
         "fingerScore": 0.75,
         "id": "v38",
         "kind": "triad",
@@ -56256,7 +56256,7 @@
         "articulations": [],
         "barre": 7,
         "chordId": "c:2:tri:3",
-        "commonness": 0.606,
+        "commonness": 0.404,
         "fingerScore": 0.85,
         "id": "v39",
         "kind": "triad",
@@ -56311,7 +56311,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:tri:3",
-        "commonness": 0.45,
+        "commonness": 0.3,
         "fingerScore": 0.25,
         "id": "v40",
         "kind": "triad",
@@ -56366,7 +56366,7 @@
         "articulations": [],
         "barre": 0,
         "chordId": "c:2:tri:3",
-        "commonness": 0.606,
+        "commonness": 0.404,
         "fingerScore": 0.85,
         "id": "v41",
         "kind": "triad",
@@ -56421,7 +56421,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:tri:3",
-        "commonness": 0.4875,
+        "commonness": 0.325,
         "fingerScore": 0.5,
         "id": "v42",
         "kind": "triad",
@@ -56476,7 +56476,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:tri:3",
-        "commonness": 0.45,
+        "commonness": 0.3,
         "fingerScore": 0.25,
         "id": "v43",
         "kind": "triad",
@@ -56531,7 +56531,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:drop3:10",
-        "commonness": 0.2925,
+        "commonness": 0.195,
         "fingerScore": 0.5,
         "id": "v44",
         "kind": "drop3",
@@ -56586,7 +56586,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:drop3:10",
-        "commonness": 0.27,
+        "commonness": 0.18,
         "fingerScore": 0.25,
         "id": "v45",
         "kind": "drop3",
@@ -56641,7 +56641,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:drop3:10",
-        "commonness": 0.27,
+        "commonness": 0.18,
         "fingerScore": 0.25,
         "id": "v46",
         "kind": "drop3",
@@ -56696,7 +56696,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:drop3:10",
-        "commonness": 0.2925,
+        "commonness": 0.195,
         "fingerScore": 0.5,
         "id": "v47",
         "kind": "drop3",
@@ -56751,7 +56751,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:drop3:10",
-        "commonness": 0.27,
+        "commonness": 0.18,
         "fingerScore": 0.25,
         "id": "v48",
         "kind": "drop3",
@@ -56806,7 +56806,7 @@
         "articulations": [],
         "barre": 5,
         "chordId": "c:2:drop3:10",
-        "commonness": 0.3411,
+        "commonness": 0.2274,
         "fingerScore": 0.6,
         "id": "v49",
         "kind": "drop3",
@@ -56861,7 +56861,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:2:drop3:10",
-        "commonness": 0.27,
+        "commonness": 0.18,
         "fingerScore": 0.25,
         "id": "v50",
         "kind": "drop3",
@@ -56916,7 +56916,7 @@
         "articulations": [],
         "barre": 0,
         "chordId": "c:3:tri:3",
-        "commonness": 0.572,
+        "commonness": 0.3146,
         "fingerScore": 1,
         "id": "v51",
         "kind": "triad",
@@ -56971,7 +56971,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:3:tri:3",
-        "commonness": 0.433333,
+        "commonness": 0.238333,
         "fingerScore": 0.5,
         "id": "v52",
         "kind": "triad",
@@ -57026,7 +57026,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:3:tri:3",
-        "commonness": 0.433333,
+        "commonness": 0.238333,
         "fingerScore": 0.5,
         "id": "v53",
         "kind": "triad",
@@ -57081,7 +57081,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:3:tri:3",
-        "commonness": 0.466667,
+        "commonness": 0.256667,
         "fingerScore": 0.75,
         "id": "v54",
         "kind": "triad",
@@ -57136,7 +57136,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:3:tri:3",
-        "commonness": 0.466667,
+        "commonness": 0.256667,
         "fingerScore": 0.75,
         "id": "v55",
         "kind": "triad",
@@ -57191,7 +57191,7 @@
         "articulations": [],
         "barre": 0,
         "chordId": "c:3:tri:3",
-        "commonness": 0.505333,
+        "commonness": 0.277933,
         "fingerScore": 0.6,
         "id": "v56",
         "kind": "triad",
@@ -57246,7 +57246,7 @@
         "articulations": [],
         "barre": 9,
         "chordId": "c:3:tri:3",
-        "commonness": 0.538667,
+        "commonness": 0.296267,
         "fingerScore": 0.85,
         "id": "v57",
         "kind": "triad",
@@ -57301,7 +57301,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:3:tri:3",
-        "commonness": 0.433333,
+        "commonness": 0.238333,
         "fingerScore": 0.5,
         "id": "v58",
         "kind": "triad",
@@ -57356,7 +57356,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:3:tri:3",
-        "commonness": 0.4,
+        "commonness": 0.22,
         "fingerScore": 0.25,
         "id": "v59",
         "kind": "triad",
@@ -57411,7 +57411,7 @@
         "articulations": [],
         "barre": 2,
         "chordId": "c:3:tri:3",
-        "commonness": 0.538667,
+        "commonness": 0.296267,
         "fingerScore": 0.85,
         "id": "v60",
         "kind": "triad",
@@ -57466,7 +57466,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:3:tri:3",
-        "commonness": 0.433333,
+        "commonness": 0.238333,
         "fingerScore": 0.5,
         "id": "v61",
         "kind": "triad",
@@ -57539,7 +57539,7 @@
         ],
         "barre": false,
         "chordId": "c:3:drop3:10",
-        "commonness": 0.296,
+        "commonness": 0.1628,
         "fingerScore": 0.5,
         "id": "v62",
         "kind": "drop3",
@@ -57612,7 +57612,7 @@
         ],
         "barre": false,
         "chordId": "c:3:drop3:10",
-        "commonness": 0.296,
+        "commonness": 0.1628,
         "fingerScore": 0.5,
         "id": "v63",
         "kind": "drop3",
@@ -57685,7 +57685,7 @@
         ],
         "barre": false,
         "chordId": "c:3:drop3:10",
-        "commonness": 0.276,
+        "commonness": 0.1518,
         "fingerScore": 0.25,
         "id": "v64",
         "kind": "drop3",
@@ -57758,7 +57758,7 @@
         ],
         "barre": 7,
         "chordId": "c:3:drop3:10",
-        "commonness": 0.3392,
+        "commonness": 0.18656,
         "fingerScore": 0.6,
         "id": "v65",
         "kind": "drop3",
@@ -57831,7 +57831,7 @@
         ],
         "barre": false,
         "chordId": "c:3:drop3:10",
-        "commonness": 0.276,
+        "commonness": 0.1518,
         "fingerScore": 0.25,
         "id": "v66",
         "kind": "drop3",
@@ -57904,7 +57904,7 @@
         ],
         "barre": 0,
         "chordId": "c:3:drop3:10",
-        "commonness": 0.3392,
+        "commonness": 0.18656,
         "fingerScore": 0.6,
         "id": "v67",
         "kind": "drop3",
@@ -57977,7 +57977,7 @@
         ],
         "barre": false,
         "chordId": "c:3:drop3:11",
-        "commonness": 0.276,
+        "commonness": 0.1518,
         "fingerScore": 0.25,
         "id": "v68",
         "kind": "drop3",
@@ -58050,7 +58050,7 @@
         ],
         "barre": false,
         "chordId": "c:3:drop3:11",
-        "commonness": 0.296,
+        "commonness": 0.1628,
         "fingerScore": 0.5,
         "id": "v69",
         "kind": "drop3",
@@ -58123,7 +58123,7 @@
         ],
         "barre": false,
         "chordId": "c:3:drop3:11",
-        "commonness": 0.276,
+        "commonness": 0.1518,
         "fingerScore": 0.25,
         "id": "v70",
         "kind": "drop3",
@@ -58196,7 +58196,7 @@
         ],
         "barre": false,
         "chordId": "c:3:drop3:11",
-        "commonness": 0.296,
+        "commonness": 0.1628,
         "fingerScore": 0.5,
         "id": "v71",
         "kind": "drop3",
@@ -58269,7 +58269,7 @@
         ],
         "barre": false,
         "chordId": "c:3:drop3:11",
-        "commonness": 0.296,
+        "commonness": 0.1628,
         "fingerScore": 0.5,
         "id": "v72",
         "kind": "drop3",
@@ -58434,7 +58434,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:4:tri:4",
-        "commonness": 0.975,
+        "commonness": 0.920833,
         "fingerScore": 0.5,
         "id": "v75",
         "kind": "triad",
@@ -58489,7 +58489,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:4:tri:4",
-        "commonness": 0.975,
+        "commonness": 0.920833,
         "fingerScore": 0.5,
         "id": "v76",
         "kind": "triad",
@@ -58599,7 +58599,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:4:tri:4",
-        "commonness": 0.975,
+        "commonness": 0.920833,
         "fingerScore": 0.5,
         "id": "v78",
         "kind": "triad",
@@ -58654,7 +58654,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:4:tri:4",
-        "commonness": 1,
+        "commonness": 0.991667,
         "fingerScore": 0.75,
         "id": "v79",
         "kind": "triad",
@@ -58709,7 +58709,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:4:tri:4",
-        "commonness": 0.9,
+        "commonness": 0.85,
         "fingerScore": 0.25,
         "id": "v80",
         "kind": "triad",
@@ -58819,7 +58819,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:4:tri:4",
-        "commonness": 1,
+        "commonness": 0.991667,
         "fingerScore": 0.75,
         "id": "v82",
         "kind": "triad",
@@ -58892,7 +58892,7 @@
         ],
         "barre": false,
         "chordId": "c:4:drop3:10",
-        "commonness": 0.666,
+        "commonness": 0.629,
         "fingerScore": 0.5,
         "id": "v83",
         "kind": "drop3",
@@ -58965,7 +58965,7 @@
         ],
         "barre": false,
         "chordId": "c:4:drop3:10",
-        "commonness": 0.666,
+        "commonness": 0.629,
         "fingerScore": 0.5,
         "id": "v84",
         "kind": "drop3",
@@ -59038,7 +59038,7 @@
         ],
         "barre": false,
         "chordId": "c:4:drop3:10",
-        "commonness": 0.621,
+        "commonness": 0.5865,
         "fingerScore": 0.25,
         "id": "v85",
         "kind": "drop3",
@@ -59111,7 +59111,7 @@
         ],
         "barre": 8,
         "chordId": "c:4:drop3:10",
-        "commonness": 0.7632,
+        "commonness": 0.7208,
         "fingerScore": 0.6,
         "id": "v86",
         "kind": "drop3",
@@ -59166,7 +59166,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:4:drop3:10",
-        "commonness": 0.54,
+        "commonness": 0.51,
         "fingerScore": 0.25,
         "id": "v87",
         "kind": "drop3",
@@ -59239,7 +59239,7 @@
         ],
         "barre": 1,
         "chordId": "c:4:drop3:10",
-        "commonness": 0.7632,
+        "commonness": 0.7208,
         "fingerScore": 0.6,
         "id": "v88",
         "kind": "drop3",
@@ -59312,7 +59312,7 @@
         ],
         "barre": false,
         "chordId": "c:4:drop3:11",
-        "commonness": 0.621,
+        "commonness": 0.5865,
         "fingerScore": 0.25,
         "id": "v89",
         "kind": "drop3",
@@ -59385,7 +59385,7 @@
         ],
         "barre": false,
         "chordId": "c:4:drop3:11",
-        "commonness": 0.666,
+        "commonness": 0.629,
         "fingerScore": 0.5,
         "id": "v90",
         "kind": "drop3",
@@ -59458,7 +59458,7 @@
         ],
         "barre": false,
         "chordId": "c:4:drop3:11",
-        "commonness": 0.621,
+        "commonness": 0.5865,
         "fingerScore": 0.25,
         "id": "v91",
         "kind": "drop3",
@@ -59531,7 +59531,7 @@
         ],
         "barre": false,
         "chordId": "c:4:drop3:11",
-        "commonness": 0.666,
+        "commonness": 0.629,
         "fingerScore": 0.5,
         "id": "v92",
         "kind": "drop3",
@@ -59586,7 +59586,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:4:drop3:11",
-        "commonness": 0.54,
+        "commonness": 0.51,
         "fingerScore": 0.25,
         "id": "v93",
         "kind": "drop3",
@@ -59659,7 +59659,7 @@
         ],
         "barre": false,
         "chordId": "c:4:drop3:11",
-        "commonness": 0.666,
+        "commonness": 0.629,
         "fingerScore": 0.5,
         "id": "v94",
         "kind": "drop3",
@@ -61229,7 +61229,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:5:drop3:10",
-        "commonness": 0.6175,
+        "commonness": 0.572,
         "fingerScore": 0.5,
         "id": "v116",
         "kind": "drop3",
@@ -61284,7 +61284,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:5:drop3:10",
-        "commonness": 0.57,
+        "commonness": 0.528,
         "fingerScore": 0.25,
         "id": "v117",
         "kind": "drop3",
@@ -61339,7 +61339,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:5:drop3:10",
-        "commonness": 0.57,
+        "commonness": 0.528,
         "fingerScore": 0.25,
         "id": "v118",
         "kind": "drop3",
@@ -61394,7 +61394,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:5:drop3:10",
-        "commonness": 0.6175,
+        "commonness": 0.572,
         "fingerScore": 0.5,
         "id": "v119",
         "kind": "drop3",
@@ -61449,7 +61449,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:5:drop3:10",
-        "commonness": 0.57,
+        "commonness": 0.528,
         "fingerScore": 0.25,
         "id": "v120",
         "kind": "drop3",
@@ -61504,7 +61504,7 @@
         "articulations": [],
         "barre": 3,
         "chordId": "c:5:drop3:10",
-        "commonness": 0.7201,
+        "commonness": 0.66704,
         "fingerScore": 0.6,
         "id": "v121",
         "kind": "drop3",
@@ -61559,7 +61559,7 @@
         "articulations": [],
         "barre": 5,
         "chordId": "c:6:tri:3",
-        "commonness": 1,
+        "commonness": 0.8866,
         "fingerScore": 1,
         "id": "v122",
         "kind": "triad",
@@ -61614,7 +61614,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:tri:3",
-        "commonness": 0.866667,
+        "commonness": 0.671667,
         "fingerScore": 0.5,
         "id": "v123",
         "kind": "triad",
@@ -61669,7 +61669,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:tri:3",
-        "commonness": 0.866667,
+        "commonness": 0.671667,
         "fingerScore": 0.5,
         "id": "v124",
         "kind": "triad",
@@ -61724,7 +61724,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:tri:3",
-        "commonness": 0.933333,
+        "commonness": 0.723333,
         "fingerScore": 0.75,
         "id": "v125",
         "kind": "triad",
@@ -61779,7 +61779,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:tri:3",
-        "commonness": 0.933333,
+        "commonness": 0.723333,
         "fingerScore": 0.75,
         "id": "v126",
         "kind": "triad",
@@ -61834,7 +61834,7 @@
         "articulations": [],
         "barre": 5,
         "chordId": "c:6:tri:3",
-        "commonness": 1,
+        "commonness": 0.783267,
         "fingerScore": 0.6,
         "id": "v127",
         "kind": "triad",
@@ -61889,7 +61889,7 @@
         "articulations": [],
         "barre": 2,
         "chordId": "c:6:tri:3",
-        "commonness": 1,
+        "commonness": 0.834933,
         "fingerScore": 0.85,
         "id": "v128",
         "kind": "triad",
@@ -61944,7 +61944,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:tri:3",
-        "commonness": 0.866667,
+        "commonness": 0.671667,
         "fingerScore": 0.5,
         "id": "v129",
         "kind": "triad",
@@ -61999,7 +61999,7 @@
         "articulations": [],
         "barre": 7,
         "chordId": "c:6:tri:3",
-        "commonness": 1,
+        "commonness": 0.834933,
         "fingerScore": 0.85,
         "id": "v130",
         "kind": "triad",
@@ -62054,7 +62054,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:tri:3",
-        "commonness": 0.8,
+        "commonness": 0.62,
         "fingerScore": 0.25,
         "id": "v131",
         "kind": "triad",
@@ -62109,7 +62109,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:drop3:10",
-        "commonness": 0.48,
+        "commonness": 0.372,
         "fingerScore": 0.25,
         "id": "v132",
         "kind": "drop3",
@@ -62164,7 +62164,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:drop3:10",
-        "commonness": 0.48,
+        "commonness": 0.372,
         "fingerScore": 0.25,
         "id": "v133",
         "kind": "drop3",
@@ -62219,7 +62219,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:drop3:10",
-        "commonness": 0.52,
+        "commonness": 0.403,
         "fingerScore": 0.5,
         "id": "v134",
         "kind": "drop3",
@@ -62274,7 +62274,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:drop3:10",
-        "commonness": 0.48,
+        "commonness": 0.372,
         "fingerScore": 0.25,
         "id": "v135",
         "kind": "drop3",
@@ -62329,7 +62329,7 @@
         "articulations": [],
         "barre": 0,
         "chordId": "c:6:drop3:10",
-        "commonness": 0.6064,
+        "commonness": 0.46996,
         "fingerScore": 0.6,
         "id": "v136",
         "kind": "drop3",
@@ -62384,7 +62384,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:6:drop3:10",
-        "commonness": 0.48,
+        "commonness": 0.372,
         "fingerScore": 0.25,
         "id": "v137",
         "kind": "drop3",
@@ -62439,7 +62439,7 @@
         "articulations": [],
         "barre": 5,
         "chordId": "c:6:drop3:10",
-        "commonness": 0.6064,
+        "commonness": 0.46996,
         "fingerScore": 0.6,
         "id": "v138",
         "kind": "drop3",
@@ -62494,7 +62494,7 @@
         "articulations": [],
         "barre": 7,
         "chordId": "c:VII:tri:4",
-        "commonness": 0.202,
+        "commonness": 0.2424,
         "fingerScore": 0.85,
         "id": "v139",
         "kind": "viiMajor",
@@ -62549,7 +62549,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:VII:tri:4",
-        "commonness": 0.1625,
+        "commonness": 0.195,
         "fingerScore": 0.5,
         "id": "v140",
         "kind": "viiMajor",
@@ -62604,7 +62604,7 @@
         "articulations": [],
         "barre": 4,
         "chordId": "c:VII:tri:4",
-        "commonness": 0.2145,
+        "commonness": 0.2574,
         "fingerScore": 1,
         "id": "v141",
         "kind": "viiMajor",
@@ -62659,7 +62659,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:VII:tri:4",
-        "commonness": 0.1625,
+        "commonness": 0.195,
         "fingerScore": 0.5,
         "id": "v142",
         "kind": "viiMajor",
@@ -62714,7 +62714,7 @@
         "articulations": [],
         "barre": 4,
         "chordId": "c:VII:tri:4",
-        "commonness": 0.1895,
+        "commonness": 0.2274,
         "fingerScore": 0.6,
         "id": "v143",
         "kind": "viiMajor",
@@ -62769,7 +62769,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:VII:tri:4",
-        "commonness": 0.175,
+        "commonness": 0.21,
         "fingerScore": 0.75,
         "id": "v144",
         "kind": "viiMajor",
@@ -62824,7 +62824,7 @@
         "articulations": [],
         "barre": 9,
         "chordId": "c:VII:tri:4",
-        "commonness": 0.1895,
+        "commonness": 0.2274,
         "fingerScore": 0.6,
         "id": "v145",
         "kind": "viiMajor",
@@ -62879,7 +62879,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:VII:tri:4",
-        "commonness": 0.175,
+        "commonness": 0.21,
         "fingerScore": 0.75,
         "id": "v146",
         "kind": "viiMajor",
@@ -62934,7 +62934,7 @@
         "articulations": [],
         "barre": false,
         "chordId": "c:VII:tri:4",
-        "commonness": 0.15,
+        "commonness": 0.18,
         "fingerScore": 0.25,
         "id": "v147",
         "kind": "viiMajor",
@@ -63001,20 +63001,801 @@
         5,
         "VII"
       ],
-      "commonness": 0.655986,
+      "commonness": 0.694553,
       "fretWindow": {
-        "max": 5,
-        "min": 2
+        "max": 8,
+        "min": 0
       },
+      "panelVoicings": [
+        [
+          {
+            "articulations": [
+              {
+                "direction": "up",
+                "fromNote": {
+                  "chordInt": "b3",
+                  "fretRel": 6,
+                  "stringIdx": 1
+                },
+                "oneDirectional": true,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "3",
+                  "fretRel": 7,
+                  "stringIdx": 1
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": false,
+            "chordId": "c:5:tri:3",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 0.5,
+            "id": "v96",
+            "isChosen": true,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "b3",
+                "chordIntPc": 3,
+                "fretRel": 6,
+                "isRoot": false,
+                "keyDeg": "b7",
+                "keyDegPc": 10,
+                "outside": false,
+                "pc": 10,
+                "slot": "third",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 8,
+                "isRoot": true,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "root",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 7,
+                "isRoot": false,
+                "keyDeg": "2",
+                "keyDegPc": 2,
+                "outside": false,
+                "pc": 2,
+                "slot": "fifth",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": 5,
+            "size": 3,
+            "spread": 2,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "articulations": [
+              {
+                "direction": "down",
+                "fromNote": {
+                  "chordInt": "3",
+                  "fretRel": 4,
+                  "stringIdx": 3
+                },
+                "oneDirectional": false,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "b3",
+                  "fretRel": 3,
+                  "stringIdx": 3
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": 3,
+            "chordId": "c:5:tri:4",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 0.85,
+            "id": "v105",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 3,
+                "isRoot": true,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "root",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 3,
+                "isRoot": false,
+                "keyDeg": "2",
+                "keyDegPc": 2,
+                "outside": false,
+                "pc": 2,
+                "slot": "fifth",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 4,
+                "isRoot": false,
+                "keyDeg": "7",
+                "keyDegPc": 11,
+                "outside": false,
+                "pc": 11,
+                "slot": "third",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": 5,
+            "size": 3,
+            "spread": 1,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "articulations": [
+              {
+                "direction": "up",
+                "fromNote": {
+                  "chordInt": "b3",
+                  "fretRel": 3,
+                  "stringIdx": 3
+                },
+                "oneDirectional": true,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "3",
+                  "fretRel": 4,
+                  "stringIdx": 3
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": 3,
+            "chordId": "c:5:tri:3",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 1,
+            "id": "v95",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 3,
+                "isRoot": true,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "root",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 3,
+                "isRoot": false,
+                "keyDeg": "2",
+                "keyDegPc": 2,
+                "outside": false,
+                "pc": 2,
+                "slot": "fifth",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "b3",
+                "chordIntPc": 3,
+                "fretRel": 3,
+                "isRoot": false,
+                "keyDeg": "b7",
+                "keyDegPc": 10,
+                "outside": false,
+                "pc": 10,
+                "slot": "third",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": 5,
+            "size": 3,
+            "spread": 0,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          }
+        ],
+        [
+          {
+            "articulations": [
+              {
+                "direction": "up",
+                "fromNote": {
+                  "chordInt": "b3",
+                  "fretRel": 8,
+                  "stringIdx": 3
+                },
+                "oneDirectional": true,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "3",
+                  "fretRel": 9,
+                  "stringIdx": 3
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": 8,
+            "chordId": "c:1:tri:3",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 1,
+            "id": "v0",
+            "isChosen": true,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 8,
+                "isRoot": true,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "root",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 8,
+                "isRoot": false,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "fifth",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "b3",
+                "chordIntPc": 3,
+                "fretRel": 8,
+                "isRoot": false,
+                "keyDeg": "b3",
+                "keyDegPc": 3,
+                "outside": false,
+                "pc": 3,
+                "slot": "third",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": 1,
+            "size": 3,
+            "spread": 0,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "articulations": [],
+            "barre": 0,
+            "chordId": "c:1:tri:4",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 0.85,
+            "id": "v12",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 0,
+                "isRoot": false,
+                "keyDeg": "3",
+                "keyDegPc": 4,
+                "outside": false,
+                "pc": 4,
+                "slot": "third",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 1,
+                "isRoot": true,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "root",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 0,
+                "isRoot": false,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "fifth",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": 1,
+            "size": 3,
+            "spread": 1,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "articulations": [
+              {
+                "direction": "up",
+                "fromNote": {
+                  "chordInt": "b3",
+                  "fretRel": 4,
+                  "stringIdx": 2
+                },
+                "oneDirectional": true,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "3",
+                  "fretRel": 5,
+                  "stringIdx": 2
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": false,
+            "chordId": "c:1:tri:3",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 0.5,
+            "id": "v1",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 3,
+                "isRoot": false,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "fifth",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "b3",
+                "chordIntPc": 3,
+                "fretRel": 4,
+                "isRoot": false,
+                "keyDeg": "b3",
+                "keyDegPc": 3,
+                "outside": false,
+                "pc": 3,
+                "slot": "third",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 5,
+                "isRoot": true,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "root",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": 1,
+            "size": 3,
+            "spread": 2,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          }
+        ],
+        [
+          {
+            "articulations": [
+              {
+                "direction": "up",
+                "fromNote": {
+                  "chordInt": "b3",
+                  "fretRel": 6,
+                  "stringIdx": 1
+                },
+                "oneDirectional": true,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "3",
+                  "fretRel": 7,
+                  "stringIdx": 1
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": false,
+            "chordId": "c:5:tri:3",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 0.5,
+            "id": "v96",
+            "isChosen": true,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "b3",
+                "chordIntPc": 3,
+                "fretRel": 6,
+                "isRoot": false,
+                "keyDeg": "b7",
+                "keyDegPc": 10,
+                "outside": false,
+                "pc": 10,
+                "slot": "third",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 8,
+                "isRoot": true,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "root",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 7,
+                "isRoot": false,
+                "keyDeg": "2",
+                "keyDegPc": 2,
+                "outside": false,
+                "pc": 2,
+                "slot": "fifth",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": 5,
+            "size": 3,
+            "spread": 2,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "articulations": [
+              {
+                "direction": "down",
+                "fromNote": {
+                  "chordInt": "3",
+                  "fretRel": 4,
+                  "stringIdx": 3
+                },
+                "oneDirectional": false,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "b3",
+                  "fretRel": 3,
+                  "stringIdx": 3
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": 3,
+            "chordId": "c:5:tri:4",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 0.85,
+            "id": "v105",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 3,
+                "isRoot": true,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "root",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 3,
+                "isRoot": false,
+                "keyDeg": "2",
+                "keyDegPc": 2,
+                "outside": false,
+                "pc": 2,
+                "slot": "fifth",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 4,
+                "isRoot": false,
+                "keyDeg": "7",
+                "keyDegPc": 11,
+                "outside": false,
+                "pc": 11,
+                "slot": "third",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": 5,
+            "size": 3,
+            "spread": 1,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "articulations": [
+              {
+                "direction": "up",
+                "fromNote": {
+                  "chordInt": "b3",
+                  "fretRel": 3,
+                  "stringIdx": 3
+                },
+                "oneDirectional": true,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "3",
+                  "fretRel": 4,
+                  "stringIdx": 3
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": 3,
+            "chordId": "c:5:tri:3",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 1,
+            "id": "v95",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 3,
+                "isRoot": true,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "root",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 3,
+                "isRoot": false,
+                "keyDeg": "2",
+                "keyDegPc": 2,
+                "outside": false,
+                "pc": 2,
+                "slot": "fifth",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "b3",
+                "chordIntPc": 3,
+                "fretRel": 3,
+                "isRoot": false,
+                "keyDeg": "b7",
+                "keyDegPc": 10,
+                "outside": false,
+                "pc": 10,
+                "slot": "third",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": 5,
+            "size": 3,
+            "spread": 0,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          }
+        ],
+        [
+          {
+            "articulations": [],
+            "barre": 7,
+            "chordId": "c:VII:tri:4",
+            "commonness": 0.2424,
+            "connected": true,
+            "fingerScore": 0.85,
+            "id": "v139",
+            "isChosen": true,
+            "kind": "viiMajor",
+            "notes": [
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 7,
+                "isRoot": true,
+                "keyDeg": "7",
+                "keyDegPc": 11,
+                "outside": false,
+                "pc": 11,
+                "slot": "root",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 7,
+                "isRoot": false,
+                "keyDeg": "b5",
+                "keyDegPc": 6,
+                "outside": true,
+                "pc": 6,
+                "slot": "fifth",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 8,
+                "isRoot": false,
+                "keyDeg": "b3",
+                "keyDegPc": 3,
+                "outside": false,
+                "pc": 3,
+                "slot": "third",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": "VII",
+            "size": 3,
+            "spread": 1,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "articulations": [],
+            "barre": false,
+            "chordId": "c:VII:tri:4",
+            "commonness": 0.195,
+            "connected": true,
+            "fingerScore": 0.5,
+            "id": "v140",
+            "isChosen": false,
+            "kind": "viiMajor",
+            "notes": [
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 2,
+                "isRoot": false,
+                "keyDeg": "b5",
+                "keyDegPc": 6,
+                "outside": true,
+                "pc": 6,
+                "slot": "fifth",
+                "stringIdx": 1
+              },
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 4,
+                "isRoot": false,
+                "keyDeg": "b3",
+                "keyDegPc": 3,
+                "outside": false,
+                "pc": 3,
+                "slot": "third",
+                "stringIdx": 2
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 4,
+                "isRoot": true,
+                "keyDeg": "7",
+                "keyDegPc": 11,
+                "outside": false,
+                "pc": 11,
+                "slot": "root",
+                "stringIdx": 3
+              }
+            ],
+            "rootDegree": "VII",
+            "size": 3,
+            "spread": 2,
+            "stringSet": [
+              1,
+              2,
+              3
+            ]
+          }
+        ]
+      ],
       "stringSet": [
         1,
         2,
         3
       ],
       "transitionIds": [
-        "t198",
-        "t17",
-        "t209"
+        "t210",
+        "t7",
+        "t222"
       ],
       "transitions": [
         {
@@ -63025,29 +63806,29 @@
           "commonness": 1,
           "direction": "up",
           "fromRoot": 5,
-          "fromVoicingId": "v95",
-          "id": "t198",
+          "fromVoicingId": "v96",
+          "id": "t210",
           "moves": [
-            {
-              "delta": 1,
-              "fromChordInt": "5",
-              "fromFret": 3,
-              "stringIdx": 2,
-              "toChordInt": "b3",
-              "toFret": 4
-            },
             {
               "delta": 2,
               "fromChordInt": "b3",
-              "fromFret": 3,
-              "stringIdx": 3,
+              "fromFret": 6,
+              "stringIdx": 1,
               "toChordInt": "1",
-              "toFret": 5
+              "toFret": 8
+            },
+            {
+              "delta": 1,
+              "fromChordInt": "5",
+              "fromFret": 7,
+              "stringIdx": 3,
+              "toChordInt": "b3",
+              "toFret": 8
             }
           ],
           "oneDirectional": false,
           "pivots": [
-            1
+            2
           ],
           "slideIntoHammer": true,
           "spread": 2,
@@ -63057,7 +63838,7 @@
             3
           ],
           "toRoot": 1,
-          "toVoicingId": "v1"
+          "toVoicingId": "v0"
         },
         {
           "articulation": {
@@ -63067,29 +63848,29 @@
           "commonness": 1,
           "direction": "down",
           "fromRoot": 1,
-          "fromVoicingId": "v1",
-          "id": "t17",
+          "fromVoicingId": "v0",
+          "id": "t7",
           "moves": [
-            {
-              "delta": -1,
-              "fromChordInt": "b3",
-              "fromFret": 4,
-              "stringIdx": 2,
-              "toChordInt": "5",
-              "toFret": 3
-            },
             {
               "delta": -2,
               "fromChordInt": "1",
-              "fromFret": 5,
-              "stringIdx": 3,
+              "fromFret": 8,
+              "stringIdx": 1,
               "toChordInt": "b3",
-              "toFret": 3
+              "toFret": 6
+            },
+            {
+              "delta": -1,
+              "fromChordInt": "b3",
+              "fromFret": 8,
+              "stringIdx": 3,
+              "toChordInt": "5",
+              "toFret": 7
             }
           ],
           "oneDirectional": false,
           "pivots": [
-            1
+            2
           ],
           "slideIntoHammer": true,
           "spread": 2,
@@ -63099,42 +63880,42 @@
             3
           ],
           "toRoot": 5,
-          "toVoicingId": "v95"
+          "toVoicingId": "v96"
         },
         {
           "articulation": {
-            "direction": "down",
-            "type": "pull"
+            "direction": "up",
+            "type": "hammer"
           },
           "commonness": 0.321667,
-          "direction": "down",
+          "direction": "up",
           "fromRoot": 5,
-          "fromVoicingId": "v95",
-          "id": "t209",
+          "fromVoicingId": "v96",
+          "id": "t222",
           "moves": [
+            {
+              "delta": 1,
+              "fromChordInt": "b3",
+              "fromFret": 6,
+              "stringIdx": 1,
+              "toChordInt": "1",
+              "toFret": 7
+            },
             {
               "delta": -1,
               "fromChordInt": "1",
-              "fromFret": 3,
-              "stringIdx": 1,
+              "fromFret": 8,
+              "stringIdx": 2,
               "toChordInt": "5",
-              "toFret": 2
+              "toFret": 7
             },
             {
               "delta": 1,
               "fromChordInt": "5",
-              "fromFret": 3,
-              "stringIdx": 2,
-              "toChordInt": "3",
-              "toFret": 4
-            },
-            {
-              "delta": 1,
-              "fromChordInt": "b3",
-              "fromFret": 3,
+              "fromFret": 7,
               "stringIdx": 3,
-              "toChordInt": "1",
-              "toFret": 4
+              "toChordInt": "3",
+              "toFret": 8
             }
           ],
           "oneDirectional": false,
@@ -63147,14 +63928,14 @@
             3
           ],
           "toRoot": "VII",
-          "toVoicingId": "v140"
+          "toVoicingId": "v139"
         }
       ],
       "voicingIds": [
-        "v95",
-        "v1",
-        "v95",
-        "v140"
+        "v96",
+        "v0",
+        "v96",
+        "v139"
       ],
       "voicings": [
         {
@@ -63163,138 +63944,65 @@
               "direction": "up",
               "fromNote": {
                 "chordInt": "b3",
-                "fretRel": 3,
-                "stringIdx": 3
+                "fretRel": 6,
+                "stringIdx": 1
               },
               "oneDirectional": true,
               "slot": "third",
               "toNote": {
                 "chordInt": "3",
-                "fretRel": 4,
-                "stringIdx": 3
-              },
-              "type": "hammer",
-              "within": true
-            }
-          ],
-          "barre": 3,
-          "chordId": "c:5:tri:3",
-          "commonness": 1,
-          "fingerScore": 1,
-          "id": "v95",
-          "kind": "triad",
-          "notes": [
-            {
-              "chordInt": "1",
-              "chordIntPc": 0,
-              "fretRel": 3,
-              "isRoot": true,
-              "keyDeg": "5",
-              "keyDegPc": 7,
-              "outside": false,
-              "pc": 7,
-              "slot": "root",
-              "stringIdx": 1
-            },
-            {
-              "chordInt": "5",
-              "chordIntPc": 7,
-              "fretRel": 3,
-              "isRoot": false,
-              "keyDeg": "2",
-              "keyDegPc": 2,
-              "outside": false,
-              "pc": 2,
-              "slot": "fifth",
-              "stringIdx": 2
-            },
-            {
-              "chordInt": "b3",
-              "chordIntPc": 3,
-              "fretRel": 3,
-              "isRoot": false,
-              "keyDeg": "b7",
-              "keyDegPc": 10,
-              "outside": false,
-              "pc": 10,
-              "slot": "third",
-              "stringIdx": 3
-            }
-          ],
-          "rootDegree": 5,
-          "size": 3,
-          "spread": 0,
-          "stringSet": [
-            1,
-            2,
-            3
-          ]
-        },
-        {
-          "articulations": [
-            {
-              "direction": "up",
-              "fromNote": {
-                "chordInt": "b3",
-                "fretRel": 4,
-                "stringIdx": 2
-              },
-              "oneDirectional": true,
-              "slot": "third",
-              "toNote": {
-                "chordInt": "3",
-                "fretRel": 5,
-                "stringIdx": 2
+                "fretRel": 7,
+                "stringIdx": 1
               },
               "type": "hammer",
               "within": true
             }
           ],
           "barre": false,
-          "chordId": "c:1:tri:3",
+          "chordId": "c:5:tri:3",
           "commonness": 1,
           "fingerScore": 0.5,
-          "id": "v1",
+          "id": "v96",
           "kind": "triad",
           "notes": [
             {
-              "chordInt": "5",
-              "chordIntPc": 7,
-              "fretRel": 3,
-              "isRoot": false,
-              "keyDeg": "5",
-              "keyDegPc": 7,
-              "outside": false,
-              "pc": 7,
-              "slot": "fifth",
-              "stringIdx": 1
-            },
-            {
               "chordInt": "b3",
               "chordIntPc": 3,
-              "fretRel": 4,
+              "fretRel": 6,
               "isRoot": false,
-              "keyDeg": "b3",
-              "keyDegPc": 3,
+              "keyDeg": "b7",
+              "keyDegPc": 10,
               "outside": false,
-              "pc": 3,
+              "pc": 10,
               "slot": "third",
-              "stringIdx": 2
+              "stringIdx": 1
             },
             {
               "chordInt": "1",
               "chordIntPc": 0,
-              "fretRel": 5,
+              "fretRel": 8,
               "isRoot": true,
-              "keyDeg": "1",
-              "keyDegPc": 0,
+              "keyDeg": "5",
+              "keyDegPc": 7,
               "outside": false,
-              "pc": 0,
+              "pc": 7,
               "slot": "root",
+              "stringIdx": 2
+            },
+            {
+              "chordInt": "5",
+              "chordIntPc": 7,
+              "fretRel": 7,
+              "isRoot": false,
+              "keyDeg": "2",
+              "keyDegPc": 2,
+              "outside": false,
+              "pc": 2,
+              "slot": "fifth",
               "stringIdx": 3
             }
           ],
-          "rootDegree": 1,
+          "rootDegree": 5,
           "size": 3,
           "spread": 2,
           "stringSet": [
@@ -63309,67 +64017,140 @@
               "direction": "up",
               "fromNote": {
                 "chordInt": "b3",
-                "fretRel": 3,
+                "fretRel": 8,
                 "stringIdx": 3
               },
               "oneDirectional": true,
               "slot": "third",
               "toNote": {
                 "chordInt": "3",
-                "fretRel": 4,
+                "fretRel": 9,
                 "stringIdx": 3
               },
               "type": "hammer",
               "within": true
             }
           ],
-          "barre": 3,
-          "chordId": "c:5:tri:3",
+          "barre": 8,
+          "chordId": "c:1:tri:3",
           "commonness": 1,
           "fingerScore": 1,
-          "id": "v95",
+          "id": "v0",
           "kind": "triad",
           "notes": [
             {
               "chordInt": "1",
               "chordIntPc": 0,
-              "fretRel": 3,
+              "fretRel": 8,
               "isRoot": true,
-              "keyDeg": "5",
-              "keyDegPc": 7,
+              "keyDeg": "1",
+              "keyDegPc": 0,
               "outside": false,
-              "pc": 7,
+              "pc": 0,
               "slot": "root",
               "stringIdx": 1
             },
             {
               "chordInt": "5",
               "chordIntPc": 7,
-              "fretRel": 3,
+              "fretRel": 8,
               "isRoot": false,
-              "keyDeg": "2",
-              "keyDegPc": 2,
+              "keyDeg": "5",
+              "keyDegPc": 7,
               "outside": false,
-              "pc": 2,
+              "pc": 7,
               "slot": "fifth",
               "stringIdx": 2
             },
             {
               "chordInt": "b3",
               "chordIntPc": 3,
-              "fretRel": 3,
+              "fretRel": 8,
+              "isRoot": false,
+              "keyDeg": "b3",
+              "keyDegPc": 3,
+              "outside": false,
+              "pc": 3,
+              "slot": "third",
+              "stringIdx": 3
+            }
+          ],
+          "rootDegree": 1,
+          "size": 3,
+          "spread": 0,
+          "stringSet": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "articulations": [
+            {
+              "direction": "up",
+              "fromNote": {
+                "chordInt": "b3",
+                "fretRel": 6,
+                "stringIdx": 1
+              },
+              "oneDirectional": true,
+              "slot": "third",
+              "toNote": {
+                "chordInt": "3",
+                "fretRel": 7,
+                "stringIdx": 1
+              },
+              "type": "hammer",
+              "within": true
+            }
+          ],
+          "barre": false,
+          "chordId": "c:5:tri:3",
+          "commonness": 1,
+          "fingerScore": 0.5,
+          "id": "v96",
+          "kind": "triad",
+          "notes": [
+            {
+              "chordInt": "b3",
+              "chordIntPc": 3,
+              "fretRel": 6,
               "isRoot": false,
               "keyDeg": "b7",
               "keyDegPc": 10,
               "outside": false,
               "pc": 10,
               "slot": "third",
+              "stringIdx": 1
+            },
+            {
+              "chordInt": "1",
+              "chordIntPc": 0,
+              "fretRel": 8,
+              "isRoot": true,
+              "keyDeg": "5",
+              "keyDegPc": 7,
+              "outside": false,
+              "pc": 7,
+              "slot": "root",
+              "stringIdx": 2
+            },
+            {
+              "chordInt": "5",
+              "chordIntPc": 7,
+              "fretRel": 7,
+              "isRoot": false,
+              "keyDeg": "2",
+              "keyDegPc": 2,
+              "outside": false,
+              "pc": 2,
+              "slot": "fifth",
               "stringIdx": 3
             }
           ],
           "rootDegree": 5,
           "size": 3,
-          "spread": 0,
+          "spread": 2,
           "stringSet": [
             1,
             2,
@@ -63378,53 +64159,53 @@
         },
         {
           "articulations": [],
-          "barre": false,
+          "barre": 7,
           "chordId": "c:VII:tri:4",
-          "commonness": 0.1625,
-          "fingerScore": 0.5,
-          "id": "v140",
+          "commonness": 0.2424,
+          "fingerScore": 0.85,
+          "id": "v139",
           "kind": "viiMajor",
           "notes": [
             {
-              "chordInt": "5",
-              "chordIntPc": 7,
-              "fretRel": 2,
-              "isRoot": false,
-              "keyDeg": "b5",
-              "keyDegPc": 6,
-              "outside": true,
-              "pc": 6,
-              "slot": "fifth",
-              "stringIdx": 1
-            },
-            {
-              "chordInt": "3",
-              "chordIntPc": 4,
-              "fretRel": 4,
-              "isRoot": false,
-              "keyDeg": "b3",
-              "keyDegPc": 3,
-              "outside": false,
-              "pc": 3,
-              "slot": "third",
-              "stringIdx": 2
-            },
-            {
               "chordInt": "1",
               "chordIntPc": 0,
-              "fretRel": 4,
+              "fretRel": 7,
               "isRoot": true,
               "keyDeg": "7",
               "keyDegPc": 11,
               "outside": false,
               "pc": 11,
               "slot": "root",
+              "stringIdx": 1
+            },
+            {
+              "chordInt": "5",
+              "chordIntPc": 7,
+              "fretRel": 7,
+              "isRoot": false,
+              "keyDeg": "b5",
+              "keyDegPc": 6,
+              "outside": true,
+              "pc": 6,
+              "slot": "fifth",
+              "stringIdx": 2
+            },
+            {
+              "chordInt": "3",
+              "chordIntPc": 4,
+              "fretRel": 8,
+              "isRoot": false,
+              "keyDeg": "b3",
+              "keyDegPc": 3,
+              "outside": false,
+              "pc": 3,
+              "slot": "third",
               "stringIdx": 3
             }
           ],
           "rootDegree": "VII",
           "size": 3,
-          "spread": 2,
+          "spread": 1,
           "stringSet": [
             1,
             2,
@@ -63446,11 +64227,738 @@
         4,
         "VII"
       ],
-      "commonness": 0.590277,
+      "commonness": 0.59604,
       "fretWindow": {
         "max": 10,
-        "min": 8
+        "min": 0
       },
+      "panelVoicings": [
+        [
+          {
+            "articulations": [
+              {
+                "direction": "down",
+                "fromNote": {
+                  "chordInt": "7",
+                  "fretRel": 9,
+                  "stringIdx": 3
+                },
+                "oneDirectional": false,
+                "slot": "seventh",
+                "toNote": {
+                  "chordInt": "b7",
+                  "fretRel": 8,
+                  "stringIdx": 3
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": false,
+            "chordId": "c:4:drop3:11",
+            "commonness": 0.629,
+            "connected": true,
+            "fingerScore": 0.5,
+            "id": "v92",
+            "isChosen": true,
+            "kind": "drop3",
+            "notes": [
+              {
+                "chordInt": "7",
+                "chordIntPc": 11,
+                "fretRel": 9,
+                "isRoot": false,
+                "keyDeg": "3",
+                "keyDegPc": 4,
+                "outside": false,
+                "pc": 4,
+                "slot": "seventh",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 10,
+                "isRoot": false,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "fifth",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 8,
+                "isRoot": true,
+                "keyDeg": "4",
+                "keyDegPc": 5,
+                "outside": false,
+                "pc": 5,
+                "slot": "root",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": 4,
+            "size": 4,
+            "spread": 2,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "articulations": [],
+            "barre": false,
+            "chordId": "c:4:tri:4",
+            "commonness": 0.991667,
+            "connected": true,
+            "fingerScore": 0.75,
+            "id": "v79",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 2,
+                "isRoot": false,
+                "keyDeg": "6",
+                "keyDegPc": 9,
+                "outside": false,
+                "pc": 9,
+                "slot": "third",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 3,
+                "isRoot": true,
+                "keyDeg": "4",
+                "keyDegPc": 5,
+                "outside": false,
+                "pc": 5,
+                "slot": "root",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 3,
+                "isRoot": false,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "fifth",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": 4,
+            "size": 3,
+            "spread": 1,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "articulations": [],
+            "barre": false,
+            "chordId": "c:4:tri:4",
+            "commonness": 0.85,
+            "connected": true,
+            "fingerScore": 0.25,
+            "id": "v80",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 5,
+                "isRoot": false,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "fifth",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 7,
+                "isRoot": false,
+                "keyDeg": "6",
+                "keyDegPc": 9,
+                "outside": false,
+                "pc": 9,
+                "slot": "third",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 8,
+                "isRoot": true,
+                "keyDeg": "4",
+                "keyDegPc": 5,
+                "outside": false,
+                "pc": 5,
+                "slot": "root",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": 4,
+            "size": 3,
+            "spread": 3,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "articulations": [
+              {
+                "direction": "up",
+                "fromNote": {
+                  "chordInt": "b3",
+                  "fretRel": 8,
+                  "stringIdx": 3
+                },
+                "oneDirectional": true,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "3",
+                  "fretRel": 9,
+                  "stringIdx": 3
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": false,
+            "chordId": "c:1:tri:3",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 0.5,
+            "id": "v6",
+            "isChosen": true,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "b3",
+                "chordIntPc": 3,
+                "fretRel": 8,
+                "isRoot": false,
+                "keyDeg": "b3",
+                "keyDegPc": 3,
+                "outside": false,
+                "pc": 3,
+                "slot": "third",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 10,
+                "isRoot": true,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "root",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 10,
+                "isRoot": false,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "fifth",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": 1,
+            "size": 3,
+            "spread": 2,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "articulations": [
+              {
+                "direction": "down",
+                "fromNote": {
+                  "chordInt": "3",
+                  "fretRel": 2,
+                  "stringIdx": 4
+                },
+                "oneDirectional": false,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "b3",
+                  "fretRel": 1,
+                  "stringIdx": 4
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": false,
+            "chordId": "c:1:tri:4",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 0.25,
+            "id": "v19",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 0,
+                "isRoot": false,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "fifth",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 2,
+                "isRoot": false,
+                "keyDeg": "3",
+                "keyDegPc": 4,
+                "outside": false,
+                "pc": 4,
+                "slot": "third",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 3,
+                "isRoot": true,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "root",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": 1,
+            "size": 3,
+            "spread": 3,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "articulations": [
+              {
+                "direction": "up",
+                "fromNote": {
+                  "chordInt": "b3",
+                  "fretRel": 1,
+                  "stringIdx": 4
+                },
+                "oneDirectional": true,
+                "slot": "third",
+                "toNote": {
+                  "chordInt": "3",
+                  "fretRel": 2,
+                  "stringIdx": 4
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": false,
+            "chordId": "c:1:tri:3",
+            "commonness": 1,
+            "connected": true,
+            "fingerScore": 0.25,
+            "id": "v7",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 0,
+                "isRoot": false,
+                "keyDeg": "5",
+                "keyDegPc": 7,
+                "outside": false,
+                "pc": 7,
+                "slot": "fifth",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "b3",
+                "chordIntPc": 3,
+                "fretRel": 1,
+                "isRoot": false,
+                "keyDeg": "b3",
+                "keyDegPc": 3,
+                "outside": false,
+                "pc": 3,
+                "slot": "third",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 3,
+                "isRoot": true,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "root",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": 1,
+            "size": 3,
+            "spread": 3,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "articulations": [
+              {
+                "direction": "down",
+                "fromNote": {
+                  "chordInt": "7",
+                  "fretRel": 9,
+                  "stringIdx": 3
+                },
+                "oneDirectional": false,
+                "slot": "seventh",
+                "toNote": {
+                  "chordInt": "b7",
+                  "fretRel": 8,
+                  "stringIdx": 3
+                },
+                "type": "hammer",
+                "within": true
+              }
+            ],
+            "barre": false,
+            "chordId": "c:4:drop3:11",
+            "commonness": 0.629,
+            "connected": true,
+            "fingerScore": 0.5,
+            "id": "v92",
+            "isChosen": true,
+            "kind": "drop3",
+            "notes": [
+              {
+                "chordInt": "7",
+                "chordIntPc": 11,
+                "fretRel": 9,
+                "isRoot": false,
+                "keyDeg": "3",
+                "keyDegPc": 4,
+                "outside": false,
+                "pc": 4,
+                "slot": "seventh",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 10,
+                "isRoot": false,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "fifth",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 8,
+                "isRoot": true,
+                "keyDeg": "4",
+                "keyDegPc": 5,
+                "outside": false,
+                "pc": 5,
+                "slot": "root",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": 4,
+            "size": 4,
+            "spread": 2,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "articulations": [],
+            "barre": false,
+            "chordId": "c:4:tri:4",
+            "commonness": 0.991667,
+            "connected": true,
+            "fingerScore": 0.75,
+            "id": "v79",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 2,
+                "isRoot": false,
+                "keyDeg": "6",
+                "keyDegPc": 9,
+                "outside": false,
+                "pc": 9,
+                "slot": "third",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 3,
+                "isRoot": true,
+                "keyDeg": "4",
+                "keyDegPc": 5,
+                "outside": false,
+                "pc": 5,
+                "slot": "root",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 3,
+                "isRoot": false,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "fifth",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": 4,
+            "size": 3,
+            "spread": 1,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "articulations": [],
+            "barre": false,
+            "chordId": "c:4:tri:4",
+            "commonness": 0.85,
+            "connected": true,
+            "fingerScore": 0.25,
+            "id": "v80",
+            "isChosen": false,
+            "kind": "triad",
+            "notes": [
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 5,
+                "isRoot": false,
+                "keyDeg": "1",
+                "keyDegPc": 0,
+                "outside": false,
+                "pc": 0,
+                "slot": "fifth",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 7,
+                "isRoot": false,
+                "keyDeg": "6",
+                "keyDegPc": 9,
+                "outside": false,
+                "pc": 9,
+                "slot": "third",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 8,
+                "isRoot": true,
+                "keyDeg": "4",
+                "keyDegPc": 5,
+                "outside": false,
+                "pc": 5,
+                "slot": "root",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": 4,
+            "size": 3,
+            "spread": 3,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "articulations": [],
+            "barre": false,
+            "chordId": "c:VII:tri:4",
+            "commonness": 0.21,
+            "connected": true,
+            "fingerScore": 0.75,
+            "id": "v144",
+            "isChosen": true,
+            "kind": "viiMajor",
+            "notes": [
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 8,
+                "isRoot": false,
+                "keyDeg": "b3",
+                "keyDegPc": 3,
+                "outside": false,
+                "pc": 3,
+                "slot": "third",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 9,
+                "isRoot": true,
+                "keyDeg": "7",
+                "keyDegPc": 11,
+                "outside": false,
+                "pc": 11,
+                "slot": "root",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 9,
+                "isRoot": false,
+                "keyDeg": "b5",
+                "keyDegPc": 6,
+                "outside": true,
+                "pc": 6,
+                "slot": "fifth",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": "VII",
+            "size": 3,
+            "spread": 1,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "articulations": [],
+            "barre": 4,
+            "chordId": "c:VII:tri:4",
+            "commonness": 0.2274,
+            "connected": true,
+            "fingerScore": 0.6,
+            "id": "v143",
+            "isChosen": false,
+            "kind": "viiMajor",
+            "notes": [
+              {
+                "chordInt": "1",
+                "chordIntPc": 0,
+                "fretRel": 4,
+                "isRoot": true,
+                "keyDeg": "7",
+                "keyDegPc": 11,
+                "outside": false,
+                "pc": 11,
+                "slot": "root",
+                "stringIdx": 3
+              },
+              {
+                "chordInt": "5",
+                "chordIntPc": 7,
+                "fretRel": 4,
+                "isRoot": false,
+                "keyDeg": "b5",
+                "keyDegPc": 6,
+                "outside": true,
+                "pc": 6,
+                "slot": "fifth",
+                "stringIdx": 4
+              },
+              {
+                "chordInt": "3",
+                "chordIntPc": 4,
+                "fretRel": 6,
+                "isRoot": false,
+                "keyDeg": "b3",
+                "keyDegPc": 3,
+                "outside": false,
+                "pc": 3,
+                "slot": "third",
+                "stringIdx": 5
+              }
+            ],
+            "rootDegree": "VII",
+            "size": 3,
+            "spread": 2,
+            "stringSet": [
+              3,
+              4,
+              5
+            ]
+          }
+        ]
+      ],
       "stringSet": [
         3,
         4,
@@ -63624,7 +65132,7 @@
           ],
           "barre": false,
           "chordId": "c:4:drop3:11",
-          "commonness": 0.666,
+          "commonness": 0.629,
           "fingerScore": 0.5,
           "id": "v92",
           "kind": "drop3",
@@ -63770,7 +65278,7 @@
           ],
           "barre": false,
           "chordId": "c:4:drop3:11",
-          "commonness": 0.666,
+          "commonness": 0.629,
           "fingerScore": 0.5,
           "id": "v92",
           "kind": "drop3",
@@ -63825,7 +65333,7 @@
           "articulations": [],
           "barre": false,
           "chordId": "c:VII:tri:4",
-          "commonness": 0.175,
+          "commonness": 0.21,
           "fingerScore": 0.75,
           "id": "v144",
           "kind": "viiMajor",

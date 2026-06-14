@@ -13,12 +13,12 @@ const WEIGHTS = {
   // lower; VII-major low/characteristic. Values in (0,1].
   func: {
     1: 1.0,
-    2: 0.45,
-    3: 0.4,
-    4: 0.9,
-    5: 0.95,
-    6: 0.8,
-    VII: 0.15,
+    2: 0.3,
+    3: 0.22,
+    4: 0.85,
+    5: 0.88,
+    6: 0.62,
+    VII: 0.18,
   },
 
   // Multiplier applied to voicings derived from a 4-note (drop-third) stack —
@@ -862,7 +862,7 @@ function tryWalk(db, adj, starts, chaos, rng) {
   const roots = voicings.map((v) => v.rootDegree);
   if (violatesAbab(roots)) return null;
 
-  return assembleProgression(voicings, transitions, stringSet);
+  return assembleProgression(db, voicings, transitions, stringSet);
 }
 
 // Deterministic exhaustive fallback (no rng) — finds the first valid 4-walk.
@@ -878,7 +878,7 @@ function dfsWalk(db, adj, voicings, transitions) {
   if (voicings.length === 4) {
     const roots = voicings.map((v) => v.rootDegree);
     if (violatesAbab(roots)) return null;
-    return assembleProgression(voicings, transitions, voicings[0].stringSet);
+    return assembleProgression(db, voicings, transitions, voicings[0].stringSet);
   }
   const cur = voicings[voicings.length - 1];
   const outs = adj[cur.id] || [];
@@ -903,9 +903,77 @@ function violatesAbabPrefix(roots) {
   return violatesAbab(roots);
 }
 
-function assembleProgression(voicings, transitions, stringSet) {
+// Same three-string set?
+function sameSet(a, b) {
+  return a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
+}
+
+// Lowest fret in a voicing (for deterministic position ordering).
+function voicingMinFret(v) {
+  let m = Infinity;
+  for (const n of v.notes) if (n.fretRel < m) m = n.fretRel;
+  return m;
+}
+
+// Set of "a|b" for every transition (both directions) — voicing connectivity.
+function buildConnPairs(db) {
+  if (db._connPairs) return db._connPairs;
+  const s = new Set();
+  for (const t of db.transitions) {
+    s.add(t.fromVoicingId + '|' + t.toVoicingId);
+    s.add(t.toVoicingId + '|' + t.fromVoicingId);
+  }
+  return (db._connPairs = s);
+}
+
+// For each of the 4 chosen voicings, the up-to-3 voicings of that same chord on
+// the same string set to DISPLAY in that panel (§6/§9). The chosen voicing is
+// always first; the rest are ranked connected-first (a voicing is "connected"
+// if a valid transition links it to a voicing of an adjacent panel's chord on
+// the same string set), then by commonness, then by fret position — fully
+// deterministic. Each returned entry is a voicing clone carrying `connected`
+// and `isChosen` flags. If fewer than 3 exist, returns what exists.
+function computePanelVoicings(db, chosen, stringSet) {
+  const conn = buildConnPairs(db);
+  const adjacentRoots = chosen.map((_, i) => {
+    const r = [];
+    if (i > 0) r.push(chosen[i - 1].rootDegree);
+    if (i < chosen.length - 1) r.push(chosen[i + 1].rootDegree);
+    return r;
+  });
+  return chosen.map((cv, i) => {
+    const r = cv.rootDegree;
+    const pool = db.voicings.filter((v) => v.rootDegree === r && sameSet(v.stringSet, stringSet));
+    const isConnected = (cand) =>
+      adjacentRoots[i].some((ar) =>
+        db.voicings.some(
+          (w) => w.rootDegree === ar && sameSet(w.stringSet, stringSet) && conn.has(cand.id + '|' + w.id)
+        )
+      );
+    const ranked = pool.slice().sort((a, b) => {
+      if (a.id === cv.id) return -1;
+      if (b.id === cv.id) return 1;
+      const ca = isConnected(a) ? 1 : 0;
+      const cb = isConnected(b) ? 1 : 0;
+      if (ca !== cb) return cb - ca;
+      if (b.commonness !== a.commonness) return b.commonness - a.commonness;
+      const fa = voicingMinFret(a);
+      const fb = voicingMinFret(b);
+      if (fa !== fb) return fa - fb;
+      return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+    });
+    return ranked.slice(0, 3).map((v) => ({
+      ...v,
+      connected: v.id === cv.id ? true : isConnected(v),
+      isChosen: v.id === cv.id,
+    }));
+  });
+}
+
+function assembleProgression(db, voicings, transitions, stringSet) {
+  const panelVoicings = computePanelVoicings(db, voicings, stringSet);
   const allFrets = [];
-  for (const v of voicings) for (const n of v.notes) allFrets.push(n.fretRel);
+  for (const panel of panelVoicings) for (const v of panel) for (const n of v.notes) allFrets.push(n.fretRel);
   const fretWindow = { min: Math.min(...allFrets), max: Math.max(...allFrets) };
 
   // commonness = blend of chord priors + transition priors + bonuses.
@@ -920,6 +988,7 @@ function assembleProgression(voicings, transitions, stringSet) {
     chordIds: voicings.map((v) => v.chordId),
     voicings,
     voicingIds: voicings.map((v) => v.id),
+    panelVoicings,
     transitions,
     transitionIds: transitions.map((t) => t.id),
     stringSet: [...stringSet],

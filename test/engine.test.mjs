@@ -270,10 +270,22 @@ test('progression has 4 chords, 3 transitions, shared string set, no ABAB', () =
       const c = p.chords;
       const abab = c[0] === c[2] && c[1] === c[3] && c[0] !== c[1];
       assert.equal(abab, false, `ABAB ${JSON.stringify(c)} seed ${seed} chaos ${chaos}`);
-      // fretWindow consistent
-      const allFrets = p.voicings.flatMap((v) => v.notes.map((n) => n.fretRel));
+      // fretWindow spans every displayed panel voicing (3 per panel)
+      const allFrets = p.panelVoicings.flat().flatMap((v) => v.notes.map((n) => n.fretRel));
       assert.equal(p.fretWindow.min, Math.min(...allFrets));
       assert.equal(p.fretWindow.max, Math.max(...allFrets));
+      // each panel: 1..3 voicings, all the same chord, chosen voicing first
+      assert.equal(p.panelVoicings.length, 4);
+      for (let i = 0; i < 4; i++) {
+        const panel = p.panelVoicings[i];
+        assert.ok(panel.length >= 1 && panel.length <= 3);
+        assert.equal(panel[0].id, p.voicings[i].id);
+        assert.equal(panel[0].isChosen, true);
+        for (const v of panel) {
+          assert.equal(v.rootDegree, p.chords[i]);
+          assert.deepEqual(v.stringSet, p.stringSet);
+        }
+      }
     }
   }
 });
