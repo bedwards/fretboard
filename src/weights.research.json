@@ -1,0 +1,62 @@
+{
+  "_source": "research worker: folk/rock/blues/country commonness + articulation/transition directionality",
+  "chordFunctionWeights": {
+    "1": 1.00,
+    "2": 0.30,
+    "3": 0.22,
+    "4": 0.85,
+    "5": 0.88,
+    "6": 0.62,
+    "VIImaj": 0.18
+  },
+  "transitionWeights": {
+    "1->4": { "weight": 0.92, "typicalDirection": "forward", "oneDirectional": false },
+    "4->1": { "weight": 0.88, "typicalDirection": "plagal-resolution", "oneDirectional": false },
+    "1->5": { "weight": 0.90, "typicalDirection": "forward", "oneDirectional": false },
+    "5->1": { "weight": 1.00, "typicalDirection": "authentic-cadence", "oneDirectional": false },
+    "4->5": { "weight": 0.85, "typicalDirection": "predominant-to-dominant", "oneDirectional": false },
+    "5->4": { "weight": 0.70, "typicalDirection": "blues-retrogression", "oneDirectional": false },
+    "6->4": { "weight": 0.78, "typicalDirection": "forward", "oneDirectional": false },
+    "4->6": { "weight": 0.45, "typicalDirection": "forward", "oneDirectional": false },
+    "1->6": { "weight": 0.72, "typicalDirection": "forward", "oneDirectional": false },
+    "6->1": { "weight": 0.60, "typicalDirection": "return-to-tonic", "oneDirectional": false },
+    "5->6": { "weight": 0.55, "typicalDirection": "step-up", "oneDirectional": false },
+    "6->5": { "weight": 0.50, "typicalDirection": "step-down", "oneDirectional": false },
+    "5->6(deceptive)": { "weight": 0.58, "typicalDirection": "deceptive-resolution-up", "oneDirectional": true },
+    "2->5": { "weight": 0.55, "typicalDirection": "predominant-to-dominant", "oneDirectional": true },
+    "5->1(cadence)": { "weight": 1.00, "typicalDirection": "authentic-cadence", "oneDirectional": true },
+    "4->1(plagal)": { "weight": 0.86, "typicalDirection": "plagal-cadence", "oneDirectional": true }
+  },
+  "commonProgressions": [
+    { "degrees": ["1", "5", "6", "4"], "weight": 1.00 },
+    { "degrees": ["1", "4", "5", "4"], "weight": 0.86 },
+    { "degrees": ["6", "4", "1", "5"], "weight": 0.84 },
+    { "degrees": ["1", "6", "4", "5"], "weight": 0.82 },
+    { "degrees": ["1", "4", "1", "5"], "weight": 0.80 },
+    { "degrees": ["1", "1", "4", "1"], "weight": 0.78 },
+    { "degrees": ["4", "4", "1", "5"], "weight": 0.76 },
+    { "degrees": ["1", "5", "4", "1"], "weight": 0.74 },
+    { "degrees": ["1", "4", "5", "1"], "weight": 0.74 },
+    { "degrees": ["4", "1", "5", "1"], "weight": 0.70 },
+    { "degrees": ["1", "4", "6", "5"], "weight": 0.66 },
+    { "degrees": ["1", "6", "2", "5"], "weight": 0.58 },
+    { "degrees": ["6", "5", "4", "5"], "weight": 0.54 },
+    { "degrees": ["1", "5", "6", "VIImaj"], "weight": 0.40 },
+    { "degrees": ["1", "VIImaj", "4", "1"], "weight": 0.38 }
+  ],
+  "articulationConventions": [
+    { "name": "blueThirdResolve", "fromInterval": "b3", "toInterval": "3", "typicalDirection": "ascending", "oneDirectional": true, "weightBonus": 0.90, "genreNotes": "Defining blues/country gesture: bend/hammer minor third into major third. Almost always ascending." },
+    { "name": "blueSeventhResolve", "fromInterval": "b7", "toInterval": "7", "typicalDirection": "ascending", "oneDirectional": true, "weightBonus": 0.55, "genreNotes": "Dominant-7th cousin of b3->3; less common, idiomatic on V and bluesy I." },
+    { "name": "suspensionFourThree", "fromInterval": "4", "toInterval": "3", "typicalDirection": "descending", "oneDirectional": true, "weightBonus": 0.60, "genreNotes": "sus4 resolving down to major third (Dsus4->D folk-rock staple)." },
+    { "name": "leadingToneResolve", "fromInterval": "7", "toInterval": "1", "typicalDirection": "ascending", "oneDirectional": true, "weightBonus": 0.65, "genreNotes": "Leading tone pulls up to tonic; strongest at V->I." },
+    { "name": "slideIntoHammerOn", "fromInterval": "any", "toInterval": "any", "typicalDirection": "ascending", "oneDirectional": false, "weightBonus": 0.50, "genreNotes": "Stock country/blues lick: slide up into a fret then hammer the next tone." }
+  ],
+  "shapeBonuses": {
+    "lowFretSpread": 0.20,
+    "indexBarreAvailable": 0.12,
+    "openShape": 0.18,
+    "hasBlueThirdPair": 0.16,
+    "hasBlueSeventhPair": 0.10,
+    "slideIntoHammerAvailable": 0.12
+  }
+}
