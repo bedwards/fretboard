@@ -1,0 +1,2 @@
+node scripts/build.mjs => index.html (single self-contained file)
+node test/run.mjs => 23 deterministic tests

@@ -42,6 +42,10 @@
   const ART_COLOR = {
     hammer: '#5eead4', pull: '#c08cff', slide: '#7c9cff', bend: '#ff7eb6'
   };
+  // symbol-only glyphs per articulation type (no words anywhere in the UI)
+  const ART_GLYPH = {
+    hammer: '⌒', pull: '⌣', slide: '∕', bend: '↝'
+  };
 
   // articulation pair sets for within-voicing detection
   const THIRD_PAIR  = new Set(['b3', '3']);
@@ -135,14 +139,13 @@
         }
       }
 
-      // panel label
-      g.appendChild(el('text', {
-        x: px + PANEL_W / 2, y: TOP - 24, 'text-anchor': 'middle',
-        class: 'panel-label'
-      }, document.createTextNode('Chord ' + (p + 1))));
-
       // the three voicings for this panel
       const voicings = panelVoicingsFor(prog, p);
+
+      // background anchor markers: EVERY occurrence of the scale-key root and the
+      // current chord's root across all 6 strings of this 12-fret window, muted
+      // unless the position is part of one of the displayed voicings (§9).
+      drawBackgroundMarkers(g, px, prog, voicings);
 
       // within-panel position connectors (dim guide lines between the 3 voicings
       // on the same string, showing the up-neck shift distance == real deltas)
@@ -173,6 +176,58 @@
   function panelVoicingsFor(prog, slot) {
     if (prog.panelVoicings && prog.panelVoicings[slot]) return prog.panelVoicings[slot];
     return [prog.voicings[slot]]; // degrade gracefully to single voicing
+  }
+
+  // ---- background anchor markers -------------------------------------------
+  function m12(n) { return ((n % 12) + 12) % 12; }
+  function openAbsOf(stringIdx) {
+    const T = (window.Fretboard && window.Fretboard.TUNING) || [4, 9, 2, 7, 11, 4];
+    return T[6 - stringIdx]; // stringIdx 1=high E -> T[5]; 6=low E -> T[0]
+  }
+  function diamond(x, y, r) {
+    return `M ${x} ${y - r} L ${x + r} ${y} L ${x} ${y + r} L ${x - r} ${y} Z`;
+  }
+  // Mark EVERY occurrence of the scale-key root (key degree 1) and the current
+  // chord's root across all six strings of the 12-fret window — muted/hollow,
+  // skipped where a displayed voicing note already sits there (§9). Key-root and
+  // chord-root are rendered with distinct shape + hue.
+  function drawBackgroundMarkers(g, px, prog, voicings) {
+    const lead = voicings[0];
+    if (!lead) return;
+    const occupied = new Set();
+    voicings.forEach(v => v.notes.forEach(n => occupied.add(n.stringIdx + ':' + n.fretRel)));
+    let keyRootAbs = null;
+    for (const n of lead.notes) {
+      if (n.keyDegPc != null) { keyRootAbs = m12(openAbsOf(n.stringIdx) + n.fretRel - n.keyDegPc); break; }
+    }
+    if (keyRootAbs == null) return;
+    const rootNote = lead.notes.find(n => n.isRoot);
+    const chordRootPc = rootNote ? rootNote.keyDegPc : null;
+    for (let s = 6; s >= 1; s--) {
+      const oAbs = openAbsOf(s);
+      const x = stringX(px, s);
+      for (let f = 0; f < FRETS; f++) {
+        if (occupied.has(s + ':' + f)) continue;
+        const deg = m12(oAbs + f - keyRootAbs);
+        const isKey = deg === 0;
+        const isChord = !isKey && chordRootPc != null && deg === chordRootPc;
+        if (!isKey && !isChord) continue;
+        const y = fretY(f);
+        if (isKey) {
+          // scale-key root (tonal home) — muted gold hollow diamond
+          g.appendChild(el('path', {
+            d: diamond(x, y, 6), fill: 'none', stroke: '#f5b94a',
+            'stroke-width': 1.2, opacity: 0.34
+          }));
+        } else {
+          // chord root — muted slate-teal hollow ring
+          g.appendChild(el('circle', {
+            cx: x, cy: y, r: 5.2, fill: 'none', stroke: '#5eead4',
+            'stroke-width': 1.2, opacity: 0.26
+          }));
+        }
+      }
+    }
   }
 
   // ---- within-panel: dim connector showing the 3 positions up the neck -----
@@ -266,25 +321,25 @@
     parent.appendChild(g);
   }
 
-  // within-voicing b3<->3 / b7<->7 opportunity: shown as a small same-string arc
+  // within-voicing articulation opportunities (b3<->3 / b7<->7), straight from
+  // the engine's per-voicing articulation list. Drawn as a small same-string
+  // slur arc with a directional tip — SYMBOL ONLY, never a word.
   function drawWithinArticulations(g, px, v, op) {
-    v.notes.forEach(n => {
-      const isThird = THIRD_PAIR.has(n.chordInt);
-      const isSeventh = SEVENTH_PAIR.has(n.chordInt);
-      if (!isThird && !isSeventh) return;
-      // partner sits one fret above (the alternate member of the slot)
-      const dir = (n.chordInt === 'b3' || n.chordInt === 'b7') ? +1 : -1; // hammer up / pull down
-      const x = stringX(px, n.stringIdx);
-      const y0 = fretY(n.fretRel);
-      const y1 = fretY(n.fretRel + dir);
-      const color = dir > 0 ? ART_COLOR.hammer : ART_COLOR.pull;
-      // small curved arc to the side of the string
-      const bow = 14;
+    const arts = v.articulations || [];
+    arts.forEach(a => {
+      if (!a.fromNote || !a.toNote) return;
+      const s = a.fromNote.stringIdx;
+      const x = stringX(px, s);
+      const y0 = fretY(a.fromNote.fretRel);
+      const y1 = fretY(a.toNote.fretRel);
+      const up = a.direction === 'up' || a.toNote.fretRel > a.fromNote.fretRel;
+      const color = up ? ART_COLOR.hammer : ART_COLOR.pull;
+      const bow = 15;
       const my = (y0 + y1) / 2;
-      const path = `M ${x} ${y0} Q ${x + bow} ${my} ${x} ${y1}`;
       g.appendChild(el('path', {
-        d: path, fill: 'none', stroke: color, 'stroke-width': 1.6,
-        opacity: 0.7 * op, 'marker-end': dir > 0 ? 'url(#tipUp)' : 'url(#tipDown)',
+        d: `M ${x} ${y0} Q ${x + bow} ${my} ${x} ${y1}`,
+        fill: 'none', stroke: color, 'stroke-width': 1.7,
+        opacity: 0.78 * op, 'marker-end': up ? 'url(#tipUp)' : 'url(#tipDown)',
         'stroke-linecap': 'round'
       }));
     });
@@ -346,21 +401,23 @@
       }));
     });
 
-    // articulation badge at midpoint of the gutter
+    // articulation indicator at midpoint of the gutter — SYMBOL ONLY (no words):
+    // a small colored glyph keyed to articulation type; ⚡ flags slide-into-hammer.
     const midX = (panelX(tIndex) + PANEL_W + panelX(tIndex + 1)) / 2;
-    const badgeY = TOP - 24;
-    const label = (tr.articulation && tr.articulation.type || 'move').toUpperCase();
+    const badgeY = TOP - 22;
+    const dirUp = tr.direction === 'up';
+    const glyph = ART_GLYPH[tr.articulation && tr.articulation.type] || '→';
+    const sym = (tr.slideIntoHammer ? '⚡' : '') + glyph + (dirUp ? '↑' : '↓');
     const badge = el('g', {});
-    const bw = 8 + label.length * 6.4 + (tr.slideIntoHammer ? 16 : 0);
-    badge.appendChild(el('rect', {
-      x: midX - bw / 2, y: badgeY - 10, width: bw, height: 20, rx: 10,
-      fill: 'rgba(10,13,20,.82)', stroke: color, 'stroke-width': 1, opacity: 0.95
+    badge.appendChild(el('circle', {
+      cx: midX, cy: badgeY, r: 12,
+      fill: 'rgba(10,13,20,.82)', stroke: color, 'stroke-width': 1.2, opacity: 0.95
     }));
     const bt = el('text', {
       x: midX, y: badgeY + 0.5, 'text-anchor': 'middle', 'dominant-baseline': 'central',
-      fill: color, style: 'font:600 9.5px Inter,system-ui;letter-spacing:.12em'
+      fill: color, style: 'font:600 11px system-ui'
     });
-    bt.appendChild(document.createTextNode((tr.slideIntoHammer ? '⚡ ' : '') + label));
+    bt.appendChild(document.createTextNode(sym));
     badge.appendChild(bt);
     g.appendChild(badge);
 
@@ -487,7 +544,7 @@
       const seedEl = document.getElementById('seedChip');
       const cb = document.getElementById('commonBar');
       if (seq) {
-        seq.textContent = prog.chords.map(c => degSym(c.rootDegree)).join('  →  ');
+        seq.textContent = prog.chords.map(c => degSym(c)).join('  →  ');
       }
       if (ssEl) ssEl.textContent = prog.stringSet.join('-');
       if (seedEl) seedEl.textContent = this.seed;
@@ -496,7 +553,7 @@
   };
 
   function degSym(d) {
-    return d === 7 ? 'VII' : String(d);
+    return d === 7 || d === 'VII' ? 'VII' : String(d);
   }
 
   window.FretboardUI = App;
