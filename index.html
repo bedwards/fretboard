@@ -1,0 +1,1963 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>Fretboard — 3-string voicing explorer</title>
+<style>
+/* =============================================================================
+ *  Fretboard — dark / slick / vibey theme
+ *  Deep near-black backdrop, subtle gradients, soft neon glow on active notes.
+ * ========================================================================== */
+
+:root {
+  /* palette */
+  --bg-0:        #07080c;   /* deepest backdrop */
+  --bg-1:        #0c0e15;   /* panel ground */
+  --bg-2:        #11141d;   /* raised surface */
+  --line:        #1c2130;   /* fret/string lines */
+  --line-soft:   #161a26;
+  --ink:         #e8ecf5;   /* primary text */
+  --ink-dim:     #8a93a8;   /* secondary text */
+  --ink-faint:   #4a5266;
+
+  /* neon accents */
+  --neon:        #5eead4;   /* teal — primary glow */
+  --neon-2:      #7c9cff;   /* periwinkle */
+  --root:        #ffd479;   /* warm gold — root notes */
+  --amber:       #ff9d5c;   /* outside note */
+  --hammer:      #5eead4;   /* articulation: hammer */
+  --pull:        #c08cff;   /* pull-off */
+  --slide:       #7c9cff;   /* slide */
+  --bend:        #ff7eb6;   /* bend */
+  --pivot:       #39415a;   /* held / barre string */
+
+  --shadow-glow: 0 0 18px;
+  --ease:        cubic-bezier(.22,.61,.36,1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background:
+    radial-gradient(1200px 700px at 18% -10%, #12182a 0%, transparent 55%),
+    radial-gradient(1100px 800px at 100% 0%, #160f22 0%, transparent 50%),
+    linear-gradient(180deg, #06070b 0%, #090b11 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.app {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 30px 28px 56px;
+}
+
+/* ----------------------------------------------------------------- header -- */
+.app-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.brand { display: flex; flex-direction: column; gap: 4px; }
+.brand h1 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: linear-gradient(92deg, var(--neon), var(--neon-2) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.brand .sub {
+  font-size: 11.5px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* --------------------------------------------------------------- controls -- */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.chaos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 16px;
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+}
+.chaos label {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.chaos .val {
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  color: var(--neon);
+  min-width: 28px;
+  text-align: right;
+  text-shadow: 0 0 10px rgba(94,234,212,.4);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 132px;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--neon) 0%, var(--neon-2) 100%);
+  outline: none;
+  opacity: .9;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #0c0e15;
+  border: 2px solid var(--neon);
+  box-shadow: 0 0 12px rgba(94,234,212,.7);
+  cursor: pointer;
+  transition: transform .15s var(--ease), box-shadow .15s var(--ease);
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.18); box-shadow: 0 0 18px rgba(94,234,212,.9); }
+input[type="range"]::-moz-range-thumb {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #0c0e15; border: 2px solid var(--neon);
+  box-shadow: 0 0 12px rgba(94,234,212,.7); cursor: pointer;
+}
+
+.shuffle {
+  position: relative;
+  padding: 11px 22px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #06120f;
+  background: linear-gradient(180deg, #6ff3dd, #45c9b6);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(94,234,212,.4), 0 8px 26px -8px rgba(94,234,212,.55);
+  transition: transform .14s var(--ease), box-shadow .2s var(--ease), filter .2s;
+}
+.shuffle:hover { transform: translateY(-1px); filter: brightness(1.06); box-shadow: 0 0 0 1px rgba(94,234,212,.6), 0 12px 32px -8px rgba(94,234,212,.7); }
+.shuffle:active { transform: translateY(0) scale(.98); }
+
+/* ------------------------------------------------------------- meta strip -- */
+.meta-strip {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+  font-size: 11.5px;
+  letter-spacing: .04em;
+  color: var(--ink-dim);
+}
+.meta-strip .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.meta-strip .chip b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.meta-strip .seq { color: var(--neon-2); letter-spacing: .12em; }
+.meta-strip .commonness-bar {
+  position: relative; width: 90px; height: 5px; border-radius: 4px;
+  background: var(--line); overflow: hidden;
+}
+.meta-strip .commonness-bar i {
+  position: absolute; inset: 0; transform-origin: left;
+  background: linear-gradient(90deg, var(--neon), var(--neon-2));
+  box-shadow: 0 0 10px rgba(94,234,212,.5);
+  transition: transform .5s var(--ease);
+}
+
+/* legend */
+.legend { display: flex; gap: 16px; margin-left: auto; flex-wrap: wrap; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; color: var(--ink-faint); letter-spacing: .06em; }
+.legend .sw { width: 11px; height: 11px; border-radius: 50%; }
+/* muted background-anchor swatches: hollow, matching the on-board markers */
+.legend .sw.mk-key { background: transparent; border: 1.4px solid #f5b94a; border-radius: 2px; transform: rotate(45deg); opacity: .7; }
+.legend .sw.mk-chord { background: transparent; border: 1.4px solid #5eead4; border-radius: 50%; opacity: .6; }
+
+/* ----------------------------------------------------------------- stage -- */
+.stage-wrap {
+  background: linear-gradient(180deg, rgba(18,21,31,.55), rgba(9,11,17,.35));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 30px 80px -40px rgba(0,0,0,.9);
+}
+#stage { display: block; width: 100%; height: auto; border-radius: 14px; }
+
+/* svg-level styling hooks */
+.panel-label {
+  font: 600 12px "Inter", system-ui, sans-serif;
+  letter-spacing: .14em;
+  fill: var(--ink-dim);
+  text-transform: uppercase;
+}
+.note-pair { font: 600 9.5px "Inter", system-ui, sans-serif; letter-spacing: .01em; }
+
+.fade-in { animation: fadeIn .55s var(--ease) both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* note pop-in on shuffle — staggered via inline animation-delay */
+.note-grp { animation: notePop .5s var(--ease) both; }
+@keyframes notePop {
+  0%   { opacity: 0; transform: translateY(6px) scale(.6); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.arrow-grp { animation: arrowDraw .6s var(--ease) both; }
+@keyframes arrowDraw { from { opacity: 0; } to { opacity: 1; } }
+
+footer.hint {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 760px) {
+  .app-head { flex-direction: column; align-items: stretch; gap: 16px; }
+  .controls { justify-content: space-between; }
+  .legend { display: none; }
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="app-head">
+    <div class="brand">
+      <h1>Fretboard</h1>
+      <span class="sub">3-string voicing explorer</span>
+    </div>
+    <div class="controls">
+      <div class="chaos">
+        <label for="chaos">Chaos</label>
+        <input id="chaos" type="range" min="0" max="100" value="0" />
+        <span class="val" id="chaosVal">0.00</span>
+      </div>
+      <button class="shuffle" id="shuffle">Shuffle</button>
+    </div>
+  </header>
+
+  <div class="meta-strip">
+    <span class="chip seq" id="seqChips">— → — → — → —</span>
+    <span class="chip">strings <b id="ssChip">—</b></span>
+    <span class="chip">seed <b id="seedChip">1</b></span>
+    <span class="chip">
+      common
+      <span class="commonness-bar"><i id="commonBar" style="transform:scaleX(0)"></i></span>
+    </span>
+    <div class="legend">
+      <span><i class="sw" style="background:#f5b94a"></i>root</span>
+      <span><i class="sw" style="background:#2bbfa8"></i>note</span>
+      <span><i class="sw" style="background:#ff8a45"></i>outside</span>
+      <span><i class="sw mk-key"></i>key</span>
+      <span><i class="sw mk-chord"></i>chord root</span>
+      <span><i class="sw" style="background:#5eead4"></i>⌒↑</span>
+      <span><i class="sw" style="background:#c08cff"></i>⌣↓</span>
+      <span><i class="sw" style="background:#7c9cff"></i>∕</span>
+      <span><i class="sw" style="background:#ff7eb6"></i>↝</span>
+    </div>
+  </div>
+
+  <div class="stage-wrap">
+    <div id="stage-mount"></div>
+  </div>
+
+  <footer class="hint">strings vertical · frets horizontal · 12-fret relative window · no fret numbers</footer>
+</div>
+
+<script type="module">
+// engine.js — Deterministic music-theory engine for the Fretboard app.
+// ZERO dependencies. Works as a browser global (window.Fretboard) AND as an
+// ES module (`import { Fretboard }` / `import Fretboard`).
+//
+// All math is key-relative, in pitch classes (mod 12). See SPEC.md §1-§8.
+
+// ===========================================================================
+// WEIGHTS — all tunable constants live here so they can be swapped later (§7).
+// ===========================================================================
+const WEIGHTS = {
+  // Chord-function priors, keyed by root scale degree (1..6) and 'VII' for the
+  // VII-as-major special chord. Folk/rock/blues/country: 1,4,5,6 high; 2,3
+  // lower; VII-major low/characteristic. Values in (0,1].
+  func: {
+    1: 1.0,
+    2: 0.3,
+    3: 0.22,
+    4: 0.85,
+    5: 0.88,
+    6: 0.62,
+    VII: 0.18,
+  },
+
+  // Multiplier applied to voicings derived from a 4-note (drop-third) stack —
+  // sevenths are rarer than plain triads in this genre frame.
+  fourNotePenalty: 0.6,
+
+  // Shape bonuses (multiplicative on a voicing's commonness), see §7.
+  shape: {
+    lowSpreadBonus: 0.25, // * (1 - spread/3): tighter => bigger bonus
+    barreBonus: 0.18, //      index-barre available
+    withinArticBonus: 0.15, // within-voicing b3<->3 or b7<->7 pair present
+  },
+
+  // Transition priors. Keyed "a-b" where a,b are root degrees (or 'VII').
+  // direction is the idiomatic motion; oneDirectional flags one-way moves.
+  transition: {
+    '1-4': { w: 0.95, direction: 'up', oneDirectional: false },
+    '4-1': { w: 0.95, direction: 'down', oneDirectional: false }, // plagal
+    '1-5': { w: 0.95, direction: 'up', oneDirectional: false },
+    '5-1': { w: 1.0, direction: 'down', oneDirectional: false }, // cadential
+    '4-5': { w: 0.85, direction: 'up', oneDirectional: false },
+    '5-4': { w: 0.8, direction: 'down', oneDirectional: false },
+    '6-4': { w: 0.8, direction: 'down', oneDirectional: false },
+    '4-6': { w: 0.7, direction: 'up', oneDirectional: false },
+    '1-6': { w: 0.85, direction: 'down', oneDirectional: false },
+    '6-1': { w: 0.85, direction: 'up', oneDirectional: false },
+    '5-6': { w: 0.7, direction: 'up', oneDirectional: true }, // deceptive, one-way
+    '6-5': { w: 0.75, direction: 'down', oneDirectional: false },
+  },
+  // Prior used for a transition between chords with no entry above (still legal,
+  // just uncommon). Same-chord repeats use repeatPrior.
+  defaultTransitionPrior: 0.25,
+  repeatPrior: 0.35,
+
+  // Articulation directionality table (§5/§7): idiomatic one-way motions, by
+  // chordInt change on a string within a transition / within a voicing.
+  // Keyed "from->to" using chordInt labels.
+  articDirection: {
+    'b3->3': { direction: 'up', oneDirectional: true }, // blues third, up
+    '3->b3': { direction: 'down', oneDirectional: false },
+    'b7->7': { direction: 'up', oneDirectional: false },
+    '7->b7': { direction: 'down', oneDirectional: false },
+    '7->1': { direction: 'up', oneDirectional: true }, // leading tone resolves up
+    '4->3': { direction: 'down', oneDirectional: true }, // suspension resolves down
+  },
+
+  // Bonus applied to a transition that slides into a fret from which a
+  // within-voicing hammer is available (the "prize" moment, §5).
+  slideIntoHammerBonus: 0.3,
+
+  // Bonus applied to a transition whose articulation is a 1-fret hammer/pull.
+  smallMoveBonus: 0.12,
+};
+
+// ===========================================================================
+// §1 — Note & degree system
+// ===========================================================================
+
+// Open-string pitch classes, low E -> high E (absolute PCs). §4.
+const TUNING = [4, 9, 2, 7, 11, 4];
+
+// Base in-key set S (§1). Outside note = 6 (b5), used only by VII-major.
+const IN_KEY = new Set([0, 2, 3, 4, 5, 7, 9, 10, 11]);
+const OUTSIDE_PC = 6;
+
+// semitone -> scale-degree label. 6 => 'b5'.
+const DEGREE_LABELS = {
+  0: '1',
+  2: '2',
+  3: 'b3',
+  4: '3',
+  5: '4',
+  6: 'b5',
+  7: '5',
+  9: '6',
+  10: 'b7',
+  11: '7',
+};
+
+function mod12(n) {
+  return ((n % 12) + 12) % 12;
+}
+
+function degreeLabel(semi) {
+  const s = mod12(semi);
+  const lbl = DEGREE_LABELS[s];
+  return lbl === undefined ? String(s) : lbl;
+}
+
+function isOutside(semi) {
+  return mod12(semi) === OUTSIDE_PC;
+}
+
+// ===========================================================================
+// §7 chaos — seeded PRNG (mulberry32). Deterministic.
+// ===========================================================================
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return function () {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Weighted sample of an index given weights and a PRNG draw in [0,1).
+function sampleIndex(weights, r) {
+  let total = 0;
+  for (let i = 0; i < weights.length; i++) total += weights[i];
+  if (total <= 0) return Math.min(weights.length - 1, Math.floor(r * weights.length));
+  let x = r * total;
+  for (let i = 0; i < weights.length; i++) {
+    x -= weights[i];
+    if (x < 0) return i;
+  }
+  return weights.length - 1;
+}
+
+// ===========================================================================
+// §3 — Chord model
+// ===========================================================================
+
+// Root scale degrees -> semitone offset.
+const ROOT_OFFSET = { 1: 0, 2: 2, 3: 4, 4: 5, 5: 7, 6: 9 };
+const ROOT_DEGREES = [1, 2, 3, 4, 5, 6];
+
+// chordInt (interval above chord root, in semis) -> label.
+function chordIntLabel(semi) {
+  const m = {
+    0: '1',
+    3: 'b3',
+    4: '3',
+    7: '5',
+    6: 'b5',
+    10: 'b7',
+    11: '7',
+  };
+  return m[mod12(semi)] || String(mod12(semi));
+}
+
+// Returns the keyDeg pitch class for a chord-root degree + interval above root.
+function keyPcOf(rootDeg, interval) {
+  if (rootDeg === 'VII') {
+    // VII-major rooted at semitone 11.
+    return mod12(11 + interval);
+  }
+  return mod12(ROOT_OFFSET[rootDeg] + interval);
+}
+
+// Build the set of chord pitch-class "members" for a given root degree.
+// Each member: { interval (above root), keyDeg (pc in key), outside }.
+// Returns slots for third/fifth/seventh; both members of a slot kept if in S.
+function chordMembers(rootDeg, opts) {
+  if (rootDeg === 'VII') {
+    // Special VII-as-major triad {7, b3, b5} relative to key = {11, 3, 6}.
+    // Intervals above root(=11): root 0, third b3=>+? root pc 11; b3 pc 3 =>
+    // interval = (3-11) mod12 = 4 (a major third above the VII root). b5 pc 6 =>
+    // interval (6-11)mod12 = 7 (a perfect fifth above the VII root).
+    // So as a *chord*, VII-major is root + major-third + fifth.
+    const root = { interval: 0, keyDeg: 11, outside: false, chordInt: 0 };
+    const third = { interval: 4, keyDeg: 3, outside: false, chordInt: 4 };
+    const fifth = { interval: 7, keyDeg: 6, outside: true, chordInt: 7 }; // b5 in key = outside
+    return { root, thirds: [third], fifth, sevenths: [] };
+  }
+
+  const rootPc = ROOT_OFFSET[rootDeg];
+  const root = { interval: 0, keyDeg: rootPc, outside: false, chordInt: 0 };
+
+  // third slot: +3 (b3) and/or +4 (3), kept if keyDeg in S.
+  const thirds = [];
+  for (const iv of [3, 4]) {
+    const kd = mod12(rootPc + iv);
+    if (IN_KEY.has(kd)) thirds.push({ interval: iv, keyDeg: kd, outside: false, chordInt: iv });
+  }
+
+  // fifth slot: +7 (kept if in S).
+  let fifth = null;
+  {
+    const kd = mod12(rootPc + 7);
+    if (IN_KEY.has(kd)) fifth = { interval: 7, keyDeg: kd, outside: false, chordInt: 7 };
+  }
+
+  // seventh slot (4-note only): +10 (b7) and/or +11 (7), kept if in S.
+  const sevenths = [];
+  if (opts.fourNote) {
+    for (const iv of [10, 11]) {
+      const kd = mod12(rootPc + iv);
+      if (IN_KEY.has(kd)) sevenths.push({ interval: iv, keyDeg: kd, outside: false, chordInt: iv });
+    }
+  }
+
+  return { root, thirds, fifth, sevenths };
+}
+
+// Enumerate the chord "definitions" (each = the abstract chord identity + the
+// 3 pitch-class members chosen for a particular voicing). One def per concrete
+// 3-note PC selection (third choice, and for 4-note the seventh choice).
+//
+// Returns array of:
+// { id, rootDegree, size:3|4, kind:'triad'|'drop3'|'viiMajor',
+//   members:[{pc,keyDeg,chordInt,interval,isRoot,outside,slot}] (3 members),
+//   articulationTargets:[{slot, chordInt, keyDeg}], commonnessBase }
+function enumerateChords(opts) {
+  const chords = [];
+
+  const roots = [...ROOT_DEGREES];
+  if (opts.viiMajor) roots.push('VII');
+
+  for (const rootDeg of roots) {
+    const m = chordMembers(rootDeg, opts);
+    if (!m.fifth) continue; // need a fifth to form our 3-string triad model
+    if (m.thirds.length === 0 && rootDeg !== 'VII') continue;
+
+    const funcKey = rootDeg === 'VII' ? 'VII' : rootDeg;
+    const funcW = WEIGHTS.func[funcKey];
+
+    // --- 3-note triads: root + (each available third) + fifth ---
+    for (let ti = 0; ti < m.thirds.length; ti++) {
+      const third = m.thirds[ti];
+      const otherThird = m.thirds.find((x) => x !== third) || null;
+      const members = [
+        { ...m.root, isRoot: true, slot: 'root' },
+        { ...third, isRoot: false, slot: 'third' },
+        { ...m.fifth, isRoot: false, slot: 'fifth' },
+      ].map((x) => ({ pc: x.keyDeg, keyDeg: x.keyDeg, chordInt: x.chordInt, interval: x.interval, isRoot: x.isRoot, outside: x.outside, slot: x.slot }));
+
+      const articulationTargets = [];
+      if (otherThird) {
+        articulationTargets.push({ slot: 'third', chordInt: otherThird.chordInt, keyDeg: otherThird.keyDeg, interval: otherThird.interval });
+      }
+
+      chords.push({
+        id: `c:${rootDeg}:tri:${third.chordInt}`,
+        rootDegree: rootDeg,
+        size: 3,
+        kind: rootDeg === 'VII' ? 'viiMajor' : 'triad',
+        members,
+        articulationTargets,
+        commonnessBase: funcW,
+      });
+    }
+
+    // --- 4-note drop-third forms: root + fifth + (each available seventh) ---
+    // Drop rule: never drop root, prefer keep fifth, so drop the third =>
+    // resulting voicing = root + fifth + seventh. The dropped third becomes an
+    // articulation target. (§3)
+    if (opts.fourNote && rootDeg !== 'VII') {
+      for (let si = 0; si < m.sevenths.length; si++) {
+        const seventh = m.sevenths[si];
+        // which third would have been there (record one as artic target):
+        // prefer the b3/3 that exists; if both, record both as targets.
+        const members = [
+          { ...m.root, isRoot: true, slot: 'root' },
+          { ...m.fifth, isRoot: false, slot: 'fifth' },
+          { ...seventh, isRoot: false, slot: 'seventh' },
+        ].map((x) => ({ pc: x.keyDeg, keyDeg: x.keyDeg, chordInt: x.chordInt, interval: x.interval, isRoot: x.isRoot, outside: x.outside, slot: x.slot }));
+
+        const articulationTargets = [];
+        // dropped third(s) -> articulation targets (hammer the 3rd back in)
+        for (const th of m.thirds) {
+          articulationTargets.push({ slot: 'third', chordInt: th.chordInt, keyDeg: th.keyDeg, interval: th.interval });
+        }
+        // the other seventh (if both b7 and 7 available) is also a target
+        const otherSeventh = m.sevenths.find((x) => x !== seventh);
+        if (otherSeventh) {
+          articulationTargets.push({ slot: 'seventh', chordInt: otherSeventh.chordInt, keyDeg: otherSeventh.keyDeg, interval: otherSeventh.interval });
+        }
+
+        chords.push({
+          id: `c:${rootDeg}:drop3:${seventh.chordInt}`,
+          rootDegree: rootDeg,
+          size: 4,
+          kind: 'drop3',
+          members,
+          articulationTargets,
+          commonnessBase: funcW * WEIGHTS.fourNotePenalty,
+        });
+      }
+    }
+  }
+
+  return chords;
+}
+
+// ===========================================================================
+// §4 — Voicings on the neck
+// ===========================================================================
+
+// Adjacent three-string sets, named high->low (1=high E..6=low E).
+// Internally we use ZERO-based "string indices" 0..5 where 0 = low E (tuning[0])
+// up to 5 = high E (tuning[5]). The SPEC naming (1=high E..6=low E) is exposed
+// as `stringIdx` = (6 - tuningIndex). We store stringSet as [hi,mid,lo] in SPEC
+// naming where hi is the *highest sounding* (smallest SPEC index).
+//
+// SPEC string sets: {1,2,3} {2,3,4} {3,4,5} {4,5,6}.
+const STRING_SETS = [
+  [1, 2, 3],
+  [2, 3, 4],
+  [3, 4, 5],
+  [4, 5, 6],
+];
+
+// Map SPEC string index (1=high E..6=low E) -> tuning array index (0=low E..5=high E).
+function tuningIndex(specIdx) {
+  return 6 - specIdx;
+}
+
+// Open pitch class for a SPEC string index.
+function openPc(specIdx) {
+  return TUNING[tuningIndex(specIdx)];
+}
+
+const FRET_WINDOW = 12; // one octave window (§6)
+const MAX_SPREAD = 3; // spread = max-min <= 3 (span <= 4 frets) (§4)
+
+// For a target pitch class on a given SPEC string, frets (relative, 0..11) that
+// sound it within the 12-fret window.
+function fretsForPc(specIdx, pc) {
+  const open = openPc(specIdx);
+  const f = mod12(pc - open);
+  // within a 12-window each pc appears exactly once at fret f (0..11).
+  return [f];
+}
+
+// Fingerability score (§5): higher = easier. Heuristic from spread + barre.
+function computeFingerScore(spread, barre) {
+  // spread 0 => easiest; spread 3 => hardest. barre helps reachability.
+  let s = 1 - spread / (MAX_SPREAD + 1);
+  if (barre !== false) s += 0.1;
+  if (s > 1) s = 1;
+  if (s < 0) s = 0;
+  return Math.round(s * 1000) / 1000;
+}
+
+let _voicingCounter = 0;
+
+// Build every voicing for a chord definition (every string set, every inversion
+// = every PC->string assignment) within the window with spread <= 3.
+function voicingsForChord(chord) {
+  const out = [];
+  const pcs = chord.members; // 3 members, each {pc,keyDeg,chordInt,...}
+
+  for (const set of STRING_SETS) {
+    // set is [hi, mid, lo] SPEC indices (hi = highest sounding string).
+    // every assignment (permutation) of the 3 members to the 3 strings.
+    const perms = permutations([0, 1, 2]);
+    for (const perm of perms) {
+      // perm[k] = index into members assigned to set[k]
+      const noteFrets = [];
+      let ok = true;
+      for (let k = 0; k < 3; k++) {
+        const member = pcs[perm[k]];
+        const specIdx = set[k];
+        const frets = fretsForPc(specIdx, member.pc);
+        if (frets.length === 0) {
+          ok = false;
+          break;
+        }
+        noteFrets.push({ specIdx, fretRel: frets[0], member });
+      }
+      if (!ok) continue;
+
+      const fretVals = noteFrets.map((n) => n.fretRel);
+      const minFret = Math.min(...fretVals);
+      const maxFret = Math.max(...fretVals);
+      const spread = maxFret - minFret;
+      if (spread > MAX_SPREAD) continue;
+
+      // barre: >=2 notes share the lowest fret => index barre at that fret.
+      const countAtMin = fretVals.filter((f) => f === minFret).length;
+      const barre = countAtMin >= 2 ? minFret : false;
+
+      const fingerScore = computeFingerScore(spread, barre);
+
+      const notes = noteFrets.map((n) => ({
+        stringIdx: n.specIdx,
+        fretRel: n.fretRel,
+        pc: n.member.pc,
+        keyDeg: degreeLabel(n.member.keyDeg),
+        keyDegPc: n.member.keyDeg,
+        chordInt: chordIntLabel(n.member.chordInt),
+        chordIntPc: n.member.chordInt,
+        slot: n.member.slot,
+        isRoot: !!n.member.isRoot,
+        outside: !!n.member.outside,
+      }));
+
+      const id = `v${_voicingCounter++}`;
+      const v = {
+        id,
+        chordId: chord.id,
+        rootDegree: chord.rootDegree,
+        size: chord.size,
+        kind: chord.kind,
+        stringSet: [...set], // [hi, mid, lo] SPEC indices
+        notes, // length 3, ordered hi->lo to match stringSet
+        spread,
+        barre,
+        fingerScore,
+        // articulation opportunities within this voicing:
+        articulations: withinVoicingArticulations(notes, chord),
+        commonness: 0, // filled below
+      };
+      v.commonness = voicingCommonness(v, chord);
+      out.push(v);
+    }
+  }
+  return out;
+}
+
+// Enumerate ALL raw PC->string assignments (every string set x every inversion)
+// for a chord, BEFORE the spread<=3 filter. Used to prove inversion coverage.
+function enumerateAllAssignments(chord) {
+  const out = [];
+  const pcs = chord.members;
+  for (const set of STRING_SETS) {
+    for (const perm of permutations([0, 1, 2])) {
+      const frets = [];
+      for (let k = 0; k < 3; k++) {
+        const member = pcs[perm[k]];
+        frets.push({ specIdx: set[k], fretRel: fretsForPc(set[k], member.pc)[0], member });
+      }
+      const fretVals = frets.map((f) => f.fretRel);
+      const spread = Math.max(...fretVals) - Math.min(...fretVals);
+      // bass = lowest-sounding = the note on the largest SPEC string index (lo)
+      const bass = frets[frets.length - 1].member;
+      out.push({ stringSet: [...set], spread, bassChordInt: bass.chordInt });
+    }
+  }
+  return out;
+}
+
+function permutations(arr) {
+  if (arr.length <= 1) return [arr.slice()];
+  const res = [];
+  for (let i = 0; i < arr.length; i++) {
+    const rest = arr.slice(0, i).concat(arr.slice(i + 1));
+    for (const p of permutations(rest)) res.push([arr[i], ...p]);
+  }
+  return res;
+}
+
+// ===========================================================================
+// §5 — Articulations: within a voicing
+// ===========================================================================
+// b3<->3 (1 fret) and b7<->7 (1 fret) on the SAME string within reach, plus
+// 4->3 bend/suspension cases. We look at each note: if the chord offers the
+// slot-partner (or a suspension target) reachable on the same string within the
+// window, emit an articulation.
+function withinVoicingArticulations(notes, chord) {
+  const arts = [];
+  for (const note of notes) {
+    // candidate partners for this note's slot:
+    const partners = [];
+    if (note.slot === 'third') {
+      // partner = the other third (b3<->3) if it exists as an artic target
+      for (const t of chord.articulationTargets) {
+        if (t.slot === 'third' && t.chordInt !== note.chordIntPc) {
+          partners.push({ chordInt: t.chordInt, keyDeg: t.keyDeg });
+        }
+      }
+    }
+    if (note.slot === 'seventh') {
+      for (const t of chord.articulationTargets) {
+        if (t.slot === 'seventh' && t.chordInt !== note.chordIntPc) {
+          partners.push({ chordInt: t.chordInt, keyDeg: t.keyDeg });
+        }
+      }
+    }
+    if (note.slot === 'fifth' && chord.size === 4) {
+      // drop-third voicing: the dropped 3rd can be hammered in on the 5th's
+      // string? No — different pc means different string position. Skip; the
+      // dropped-third target is handled as a transition/target, not same-string.
+    }
+
+    for (const partner of partners) {
+      // partner sounds on the same string at fret = note.fretRel + delta
+      const deltaSemi = mod12(partner.chordInt - note.chordIntPc);
+      // pick the signed minimal fret delta (within +/-2)
+      let delta = deltaSemi;
+      if (delta > 6) delta -= 12;
+      if (Math.abs(delta) > 2) continue; // not reachable on same string
+      const partnerFret = note.fretRel + delta;
+      if (partnerFret < 0 || partnerFret > FRET_WINDOW - 1) continue;
+
+      const fromLabel = chordIntLabel(note.chordIntPc);
+      const toLabel = chordIntLabel(partner.chordInt);
+      const dirKey = `${fromLabel}->${toLabel}`;
+      const dirRule = WEIGHTS.articDirection[dirKey];
+      const direction = dirRule ? dirRule.direction : delta > 0 ? 'up' : 'down';
+      const oneDirectional = dirRule ? dirRule.oneDirectional : false;
+      const type = Math.abs(delta) === 1 ? 'hammer' : 'slide';
+
+      arts.push({
+        type, // 'hammer' (1 fret) | 'slide' (2 frets)
+        slot: note.slot,
+        fromNote: { stringIdx: note.stringIdx, fretRel: note.fretRel, chordInt: fromLabel },
+        toNote: { stringIdx: note.stringIdx, fretRel: partnerFret, chordInt: toLabel },
+        direction,
+        oneDirectional,
+        within: true,
+      });
+    }
+  }
+  return arts;
+}
+
+// ===========================================================================
+// §7 — Voicing commonness (function + shape).
+// ===========================================================================
+function voicingCommonness(v, chord) {
+  let c = chord.commonnessBase; // already includes 4-note penalty & func
+
+  // shape bonuses (multiplicative-ish, kept in [0,1])
+  let bonus = 0;
+  bonus += WEIGHTS.shape.lowSpreadBonus * (1 - v.spread / MAX_SPREAD);
+  if (v.barre !== false) bonus += WEIGHTS.shape.barreBonus;
+  if (v.articulations.length > 0) bonus += WEIGHTS.shape.withinArticBonus;
+
+  c = c * (1 + bonus);
+  // normalize to [0,1] via a soft cap
+  if (c > 1) c = 1;
+  if (c < 0) c = 0;
+  return Math.round(c * 1e6) / 1e6;
+}
+
+// ===========================================================================
+// §5 — Transitions: between two voicings on the SAME string set.
+// ===========================================================================
+let _transitionCounter = 0;
+
+function buildTransition(from, to) {
+  // must share the exact same string set
+  if (from.stringSet.join(',') !== to.stringSet.join(',')) return null;
+  if (from.id === to.id) return null;
+
+  const moves = [];
+  const pivots = [];
+  // notes are ordered hi->lo matching stringSet for both.
+  for (let k = 0; k < 3; k++) {
+    const a = from.notes[k];
+    const b = to.notes[k];
+    const delta = b.fretRel - a.fretRel;
+    if (delta === 0) {
+      pivots.push(a.stringIdx);
+    } else {
+      moves.push({
+        stringIdx: a.stringIdx,
+        fromFret: a.fretRel,
+        toFret: b.fretRel,
+        delta,
+        fromChordInt: a.chordInt,
+        toChordInt: b.chordInt,
+      });
+    }
+  }
+
+  // Only treat as a usable transition if every moving string moves by 1-2 frets
+  // (the articulation range, §5). If any string jumps >2 frets it's not a
+  // smooth same-set transition.
+  for (const mv of moves) {
+    if (Math.abs(mv.delta) > 2) return null;
+  }
+  // need at least one moving string OR same chord identity wouldn't move;
+  // allow zero moves only when chords differ but happen to share positions —
+  // that's still a valid (trivial) transition. We keep it.
+
+  // combined spread across both voicings (cluster tightness)
+  const allFrets = from.notes.map((n) => n.fretRel).concat(to.notes.map((n) => n.fretRel));
+  const spread = Math.max(...allFrets) - Math.min(...allFrets);
+
+  // primary articulation = the (first) moving string's motion
+  let articulation = null;
+  let direction = null;
+  let oneDirectional = false;
+  if (moves.length > 0) {
+    // choose the move with the smallest |delta| as the featured articulation
+    const featured = moves.slice().sort((x, y) => Math.abs(x.delta) - Math.abs(y.delta))[0];
+    const type = Math.abs(featured.delta) === 1 ? (featured.delta > 0 ? 'hammer' : 'pull') : 'slide';
+    const dirKey = `${featured.fromChordInt}->${featured.toChordInt}`;
+    const dirRule = WEIGHTS.articDirection[dirKey];
+    direction = dirRule ? dirRule.direction : featured.delta > 0 ? 'up' : 'down';
+    oneDirectional = dirRule ? dirRule.oneDirectional : false;
+    articulation = { type, direction };
+  }
+
+  // slideIntoHammer: a moving string slides into a fret from which a
+  // within-voicing hammer (b3->3/b7->7) is available in the destination voicing
+  // on that same string.
+  let slideIntoHammer = false;
+  if (moves.length > 0 && to.articulations.length > 0) {
+    for (const mv of moves) {
+      if (Math.abs(mv.delta) >= 1) {
+        for (const art of to.articulations) {
+          if (art.fromNote.stringIdx === mv.stringIdx && art.within) {
+            slideIntoHammer = true;
+            break;
+          }
+        }
+      }
+      if (slideIntoHammer) break;
+    }
+  }
+
+  const t = {
+    id: `t${_transitionCounter++}`,
+    fromVoicingId: from.id,
+    toVoicingId: to.id,
+    fromRoot: from.rootDegree,
+    toRoot: to.rootDegree,
+    stringSet: [...from.stringSet],
+    moves,
+    pivots,
+    articulation,
+    oneDirectional,
+    direction,
+    slideIntoHammer,
+    spread,
+    commonness: 0,
+  };
+  t.commonness = transitionCommonness(t, from, to);
+  return t;
+}
+
+function transitionKey(a, b) {
+  return `${a}-${b}`;
+}
+
+function transitionCommonness(t, from, to) {
+  let base;
+  if (from.rootDegree === to.rootDegree) {
+    base = WEIGHTS.repeatPrior;
+  } else {
+    const key = transitionKey(from.rootDegree, to.rootDegree);
+    const entry = WEIGHTS.transition[key];
+    base = entry ? entry.w : WEIGHTS.defaultTransitionPrior;
+  }
+
+  let bonus = 0;
+  bonus += WEIGHTS.shape.lowSpreadBonus * (1 - Math.min(t.spread, 6) / 6);
+  if (t.pivots.length >= 2) bonus += WEIGHTS.shape.barreBonus; // held barre
+  if (t.slideIntoHammer) bonus += WEIGHTS.slideIntoHammerBonus;
+  if (t.articulation && (t.articulation.type === 'hammer' || t.articulation.type === 'pull')) {
+    bonus += WEIGHTS.smallMoveBonus;
+  }
+
+  let c = base * (1 + bonus);
+  if (c > 1) c = 1;
+  if (c < 0) c = 0;
+  return Math.round(c * 1e6) / 1e6;
+}
+
+// ===========================================================================
+// §8 — build(): exhaustive database.
+// ===========================================================================
+function build(opts = {}) {
+  const options = {
+    fourNote: !!opts.fourNote,
+    viiMajor: !!opts.viiMajor,
+    expanded: !!opts.expanded,
+  };
+
+  // reset deterministic counters so ids are pure functions of opts
+  _voicingCounter = 0;
+  _transitionCounter = 0;
+
+  const chords = enumerateChords(options);
+
+  // voicings
+  const voicings = [];
+  const voicingsByChord = {};
+  for (const chord of chords) {
+    const vs = voicingsForChord(chord);
+    voicingsByChord[chord.id] = vs;
+    for (const v of vs) voicings.push(v);
+  }
+
+  // index voicings by string set for transition enumeration
+  const byStringSet = {};
+  for (const v of voicings) {
+    const key = v.stringSet.join(',');
+    (byStringSet[key] || (byStringSet[key] = [])).push(v);
+  }
+
+  // transitions: every valid same-string-set ordered pair (from != to) whose
+  // moves are all within 1-2 frets.
+  const transitions = [];
+  for (const key of Object.keys(byStringSet)) {
+    const list = byStringSet[key];
+    for (let i = 0; i < list.length; i++) {
+      for (let j = 0; j < list.length; j++) {
+        if (i === j) continue;
+        const t = buildTransition(list[i], list[j]);
+        if (t) transitions.push(t);
+      }
+    }
+  }
+
+  // ---- meta coverage counts (§8) ----
+  const meta = computeMeta(options, chords, voicings, transitions);
+
+  return {
+    options,
+    chords,
+    voicings,
+    transitions,
+    meta,
+  };
+}
+
+function computeMeta(options, chords, voicings, transitions) {
+  const voicingsByRoot = {};
+  const voicingsByStringSet = {};
+  const voicingsBySize = {};
+  const inversionClasses = new Set(); // chordId|stringSet|bassChordInt
+  for (const v of voicings) {
+    voicingsByRoot[v.rootDegree] = (voicingsByRoot[v.rootDegree] || 0) + 1;
+    const ssk = v.stringSet.join(',');
+    voicingsByStringSet[ssk] = (voicingsByStringSet[ssk] || 0) + 1;
+    voicingsBySize[v.size] = (voicingsBySize[v.size] || 0) + 1;
+    // bass = lowest sounding note = the note on the lowest SPEC index? lowest
+    // sounding = largest SPEC string index in the set (lo string). notes are
+    // ordered hi->lo so notes[2] is the lowest sounding.
+    const bass = v.notes[2];
+    inversionClasses.add(`${v.chordId}|${ssk}|${bass.chordIntPc}`);
+  }
+
+  const transClasses = new Set(); // fromRoot-toRoot
+  const transByStringSet = {};
+  for (const t of transitions) {
+    transClasses.add(`${t.fromRoot}-${t.toRoot}`);
+    const k = t.stringSet.join(',');
+    transByStringSet[k] = (transByStringSet[k] || 0) + 1;
+  }
+
+  return {
+    options,
+    counts: {
+      chords: chords.length,
+      voicings: voicings.length,
+      transitions: transitions.length,
+    },
+    voicingsByRoot,
+    voicingsByStringSet,
+    voicingsBySize,
+    inversionClassCount: inversionClasses.size,
+    transitionClassCount: transClasses.size,
+    transitionClasses: [...transClasses].sort(),
+    transitionsByStringSet: transByStringSet,
+    stringSets: STRING_SETS.map((s) => s.join(',')),
+    roots: chords.reduce((acc, c) => {
+      if (!acc.includes(c.rootDegree)) acc.push(c.rootDegree);
+      return acc;
+    }, []),
+  };
+}
+
+// ===========================================================================
+// §6 — Progression generator: seeded weighted random walk.
+// ===========================================================================
+
+// chaos-shaped weight: p_i ∝ commonness_i^(1-chaos).
+function chaosWeight(commonness, chaos) {
+  const eps = 1e-9;
+  const base = Math.max(commonness, eps);
+  return Math.pow(base, 1 - chaos);
+}
+
+// Build adjacency: for each voicing, the list of outgoing transitions.
+function buildAdjacency(db) {
+  const adj = {};
+  const voicingById = {};
+  for (const v of db.voicings) voicingById[v.id] = v;
+  for (const t of db.transitions) {
+    (adj[t.fromVoicingId] || (adj[t.fromVoicingId] = [])).push(t);
+  }
+  return { adj, voicingById };
+}
+
+// One deterministic 4-chord progression.
+function progression(db, params = {}) {
+  const chaos = clamp01(params.chaos === undefined ? 0 : params.chaos);
+  const seed = (params.seed === undefined ? 1 : params.seed) >>> 0;
+  const rng = mulberry32(seed);
+
+  const { adj, voicingById } = db._adj || (db._adj = buildAdjacency(db));
+
+  // 1. pick the starting voicing weighted by chaos-shaped commonness.
+  const starts = db.voicings.filter((v) => (adj[v.id] || []).length > 0);
+  if (starts.length === 0) {
+    throw new Error('no connectable voicings');
+  }
+
+  // We attempt walks; because of the ABAB forbidden rule and connectivity we
+  // may need to retry. Retries consume the SAME rng stream so the whole thing
+  // stays a pure function of (seed, chaos).
+  const MAX_ATTEMPTS = 200;
+  for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+    const result = tryWalk(db, adj, starts, chaos, rng);
+    if (result) return result;
+  }
+  // Fallback: relax ABAB? No — spec forbids it. As a last resort, do a
+  // deterministic exhaustive search for any valid 4-walk.
+  const fallback = deterministicWalk(db, adj, starts);
+  if (fallback) return fallback;
+  throw new Error('could not generate a valid progression');
+}
+
+function tryWalk(db, adj, starts, chaos, rng) {
+  const startWeights = starts.map((v) => chaosWeight(v.commonness, chaos));
+  const startV = starts[sampleIndex(startWeights, rng())];
+
+  const voicings = [startV];
+  const transitions = [];
+  const stringSet = startV.stringSet;
+
+  for (let step = 0; step < 3; step++) {
+    const cur = voicings[voicings.length - 1];
+    let outs = adj[cur.id] || [];
+
+    // filter to candidates that keep us on the same string set (they already do
+    // by construction) and don't immediately create a forbidden ABAB.
+    const candidates = outs.filter((t) => {
+      const nextV = db.voicings.find((x) => x.id === t.toVoicingId);
+      // tentative chord sequence
+      const seqRoots = voicings.map((v) => v.rootDegree).concat(nextV.rootDegree);
+      return !violatesAbab(seqRoots);
+    });
+
+    if (candidates.length === 0) return null;
+
+    const w = candidates.map((t) => chaosWeight(t.commonness, chaos));
+    const chosen = candidates[sampleIndex(w, rng())];
+    const nextV = db.voicings.find((x) => x.id === chosen.toVoicingId);
+    voicings.push(nextV);
+    transitions.push(chosen);
+  }
+
+  const roots = voicings.map((v) => v.rootDegree);
+  if (violatesAbab(roots)) return null;
+
+  return assembleProgression(db, voicings, transitions, stringSet);
+}
+
+// Deterministic exhaustive fallback (no rng) — finds the first valid 4-walk.
+function deterministicWalk(db, adj) {
+  for (const start of db.voicings) {
+    const path = dfsWalk(db, adj, [start], []);
+    if (path) return path;
+  }
+  return null;
+}
+
+function dfsWalk(db, adj, voicings, transitions) {
+  if (voicings.length === 4) {
+    const roots = voicings.map((v) => v.rootDegree);
+    if (violatesAbab(roots)) return null;
+    return assembleProgression(db, voicings, transitions, voicings[0].stringSet);
+  }
+  const cur = voicings[voicings.length - 1];
+  const outs = adj[cur.id] || [];
+  for (const t of outs) {
+    const nextV = db.voicings.find((x) => x.id === t.toVoicingId);
+    const roots = voicings.map((v) => v.rootDegree).concat(nextV.rootDegree);
+    if (violatesAbabPrefix(roots)) continue;
+    const res = dfsWalk(db, adj, voicings.concat(nextV), transitions.concat(t));
+    if (res) return res;
+  }
+  return null;
+}
+
+// ABAB violation for a full 4-chord sequence: c1==c3 && c2==c4 && c1!=c2.
+function violatesAbab(roots) {
+  if (roots.length < 4) return false;
+  return roots[0] === roots[2] && roots[1] === roots[3] && roots[0] !== roots[1];
+}
+// prefix check: only meaningful at length 4.
+function violatesAbabPrefix(roots) {
+  if (roots.length < 4) return false;
+  return violatesAbab(roots);
+}
+
+// Same three-string set?
+function sameSet(a, b) {
+  return a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
+}
+
+// Lowest fret in a voicing (for deterministic position ordering).
+function voicingMinFret(v) {
+  let m = Infinity;
+  for (const n of v.notes) if (n.fretRel < m) m = n.fretRel;
+  return m;
+}
+
+// Set of "a|b" for every transition (both directions) — voicing connectivity.
+function buildConnPairs(db) {
+  if (db._connPairs) return db._connPairs;
+  const s = new Set();
+  for (const t of db.transitions) {
+    s.add(t.fromVoicingId + '|' + t.toVoicingId);
+    s.add(t.toVoicingId + '|' + t.fromVoicingId);
+  }
+  return (db._connPairs = s);
+}
+
+// For each of the 4 chosen voicings, the up-to-3 voicings of that same chord on
+// the same string set to DISPLAY in that panel (§6/§9). The chosen voicing is
+// always first; the rest are ranked connected-first (a voicing is "connected"
+// if a valid transition links it to a voicing of an adjacent panel's chord on
+// the same string set), then by commonness, then by fret position — fully
+// deterministic. Each returned entry is a voicing clone carrying `connected`
+// and `isChosen` flags. If fewer than 3 exist, returns what exists.
+function computePanelVoicings(db, chosen, stringSet) {
+  const conn = buildConnPairs(db);
+  const adjacentRoots = chosen.map((_, i) => {
+    const r = [];
+    if (i > 0) r.push(chosen[i - 1].rootDegree);
+    if (i < chosen.length - 1) r.push(chosen[i + 1].rootDegree);
+    return r;
+  });
+  return chosen.map((cv, i) => {
+    const r = cv.rootDegree;
+    const pool = db.voicings.filter((v) => v.rootDegree === r && sameSet(v.stringSet, stringSet));
+    const isConnected = (cand) =>
+      adjacentRoots[i].some((ar) =>
+        db.voicings.some(
+          (w) => w.rootDegree === ar && sameSet(w.stringSet, stringSet) && conn.has(cand.id + '|' + w.id)
+        )
+      );
+    const ranked = pool.slice().sort((a, b) => {
+      if (a.id === cv.id) return -1;
+      if (b.id === cv.id) return 1;
+      const ca = isConnected(a) ? 1 : 0;
+      const cb = isConnected(b) ? 1 : 0;
+      if (ca !== cb) return cb - ca;
+      if (b.commonness !== a.commonness) return b.commonness - a.commonness;
+      const fa = voicingMinFret(a);
+      const fb = voicingMinFret(b);
+      if (fa !== fb) return fa - fb;
+      return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+    });
+    return ranked.slice(0, 3).map((v) => ({
+      ...v,
+      connected: v.id === cv.id ? true : isConnected(v),
+      isChosen: v.id === cv.id,
+    }));
+  });
+}
+
+function assembleProgression(db, voicings, transitions, stringSet) {
+  const panelVoicings = computePanelVoicings(db, voicings, stringSet);
+  const allFrets = [];
+  for (const panel of panelVoicings) for (const v of panel) for (const n of v.notes) allFrets.push(n.fretRel);
+  const fretWindow = { min: Math.min(...allFrets), max: Math.max(...allFrets) };
+
+  // commonness = blend of chord priors + transition priors + bonuses.
+  let prod = 1;
+  for (const v of voicings) prod *= Math.max(v.commonness, 1e-6);
+  for (const t of transitions) prod *= Math.max(t.commonness, 1e-6);
+  // geometric mean over the 7 factors to keep in [0,1]
+  const commonness = Math.round(Math.pow(prod, 1 / (voicings.length + transitions.length)) * 1e6) / 1e6;
+
+  return {
+    chords: voicings.map((v) => v.rootDegree),
+    chordIds: voicings.map((v) => v.chordId),
+    voicings,
+    voicingIds: voicings.map((v) => v.id),
+    panelVoicings,
+    transitions,
+    transitionIds: transitions.map((t) => t.id),
+    stringSet: [...stringSet],
+    fretWindow,
+    commonness,
+  };
+}
+
+// n independent picks; seed advances per pick so each is distinct & reproducible.
+function shuffle(db, params = {}) {
+  const chaos = clamp01(params.chaos === undefined ? 0 : params.chaos);
+  const seed = (params.seed === undefined ? 1 : params.seed) >>> 0;
+  const n = params.n === undefined ? 1 : params.n;
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    // derive a sub-seed deterministically from (seed, i) via mulberry mix.
+    const subSeed = deriveSeed(seed, i);
+    out.push(progression(db, { chaos, seed: subSeed }));
+  }
+  return out;
+}
+
+// Derive a child seed deterministically from a base seed + index.
+function deriveSeed(seed, i) {
+  // mix using the same hashing core as mulberry32 advance.
+  let a = (seed ^ (Math.imul(i + 1, 0x9e3779b1))) >>> 0;
+  a = (a + 0x6d2b79f5) | 0;
+  let t = Math.imul(a ^ (a >>> 15), 1 | a);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return (t ^ (t >>> 14)) >>> 0;
+}
+
+function clamp01(x) {
+  if (x < 0) return 0;
+  if (x > 1) return 1;
+  return x;
+}
+
+// ===========================================================================
+// §2/§8 — label()
+// ===========================================================================
+// note may be { keyDegPc, chordIntPc } or { pc, chordIntPc } etc. We support the
+// voicing-note shape and a raw {pc, rootPc}. `key` is an optional absolute key
+// root pc for letter display (not required by engine math).
+function label(note, key) {
+  let keyDegPc;
+  let chordIntPc;
+  if (note.keyDegPc !== undefined) keyDegPc = note.keyDegPc;
+  else if (note.pc !== undefined) keyDegPc = mod12(note.pc - (key || 0));
+  else keyDegPc = 0;
+
+  if (note.chordIntPc !== undefined) chordIntPc = note.chordIntPc;
+  else chordIntPc = 0;
+
+  return {
+    pair: [degreeLabel(keyDegPc), chordIntLabel(chordIntPc)],
+    outside: isOutside(keyDegPc),
+  };
+}
+
+// ===========================================================================
+// Public API object
+// ===========================================================================
+const Fretboard = {
+  TUNING,
+  WEIGHTS,
+  STRING_SETS,
+  degreeLabel,
+  isOutside,
+  chordIntLabel,
+  build,
+  progression,
+  shuffle,
+  label,
+  // exposed internals for testing / advanced use:
+  _internal: {
+    mulberry32,
+    chaosWeight,
+    enumerateChords,
+    chordMembers,
+    voicingsForChord,
+    enumerateAllAssignments,
+    buildTransition,
+    deriveSeed,
+    sampleIndex,
+  },
+};
+
+// Browser global
+if (typeof globalThis !== 'undefined') {
+  globalThis.Fretboard = Fretboard;
+}
+
+export { Fretboard };
+export default Fretboard;
+
+</script>
+<script>
+/* =============================================================================
+ *  Fretboard UI — pure JS, zero deps. SVG renderer.
+ *
+ *  Renders a four-chord Progression (SPEC §6/§9):
+ *    - 4 panels left->right (chords 1..4)
+ *    - strings VERTICAL, frets HORIZONTAL, static 12-fret window, no fret #s
+ *    - each panel shows the chord in THREE voicings/positions
+ *    - geometric fidelity: y of every note derived from note.fretRel
+ *    - within-voicing articulation arcs (b3<->3 / b7<->7)
+ *    - cross-panel transition arrows, colored by articulation, arrowhead=dir
+ *
+ *  Rendering is a PURE function of the engine output (no Math.random here).
+ *
+ *  ---------------------------------------------------------------------------
+ *  FIELDS THIS RENDERER READS  (engine must guarantee these):
+ *    Progression: chords[].rootDegree, stringSet, fretWindow.{min,max},
+ *                 commonness, voicings[] (chosen v1..v4), transitions[] (t12..),
+ *                 + STUB: panelVoicings[[v x3] x4], panelTransitions[[t x2] x4]
+ *                 (see ASSUMPTION note — real engine field name TBD)
+ *    Voicing:     id, rootDegree, stringSet[hi,mid,lo], spread, barre,
+ *                 notes[].{stringIdx, fretRel, keyDeg, chordInt, isRoot, outside}
+ *    Transition:  fromVoicingId, toVoicingId, stringSet, articulation.{type,
+ *                 direction}, pivots[], slideIntoHammer, moves[].{stringIdx,
+ *                 fromFret, toFret, delta}
+ * ========================================================================== */
+(function () {
+  'use strict';
+
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const FRETS = 12;                 // static 12-fret window (rows)
+
+  // ---- layout geometry (all in svg user units) ----------------------------
+  const PANEL_W = 232;              // width of one fretboard panel
+  const GUTTER  = 92;               // gap between panels (room for arrows)
+  const PAD_X   = 26;
+  const TOP     = 58;               // headroom for panel labels
+  const BOARD_H = 540;              // height of the 12-fret board
+  const BOTTOM  = 46;               // nut headroom below board
+  const STAGE_W = PAD_X * 2 + PANEL_W * 4 + GUTTER * 3;
+  const STAGE_H = TOP + BOARD_H + BOTTOM;
+
+  const ART_COLOR = {
+    hammer: '#5eead4', pull: '#c08cff', slide: '#7c9cff', bend: '#ff7eb6'
+  };
+  // symbol-only glyphs per articulation type (no words anywhere in the UI)
+  const ART_GLYPH = {
+    hammer: '⌒', pull: '⌣', slide: '∕', bend: '↝'
+  };
+
+  // articulation pair sets for within-voicing detection
+  const THIRD_PAIR  = new Set(['b3', '3']);
+  const SEVENTH_PAIR = new Set(['b7', '7']);
+
+  // ----- helpers ------------------------------------------------------------
+  function el(name, attrs, children) {
+    const n = document.createElementNS(SVGNS, name);
+    if (attrs) for (const k in attrs) {
+      if (attrs[k] == null) continue;
+      n.setAttribute(k, attrs[k]);
+    }
+    if (children) (Array.isArray(children) ? children : [children]).forEach(c => {
+      if (c) n.appendChild(c);
+    });
+    return n;
+  }
+
+  // x within a panel for a given string index (1=high E rightmost? we map
+  // hi->left ... lo->right reading like a chord chart held up). We render the
+  // three active strings of the voicing's string set evenly across the panel,
+  // and draw the full 6-string context faintly behind.
+  function panelX(panelIdx) { return PAD_X + panelIdx * (PANEL_W + GUTTER); }
+
+  // y for a fret index inside the 12-fret window (fret 0 = nut at top).
+  // Evenly spaced rows shared by all panels => distances comparable. GEOMETRIC
+  // FIDELITY: y is a pure linear function of fretRel.
+  function fretY(fret) {
+    const rowH = BOARD_H / FRETS;
+    return TOP + fret * rowH + rowH * 0.5;
+  }
+
+  // Map the six string indices (1..6) to x within a panel. The active three
+  // (the voicing's string set) are spread wide & bright; context strings sit
+  // between/around faintly. We lay strings 6(low,left) .. 1(high,right).
+  function stringX(px, stringIdx) {
+    // stringIdx 1..6 ; place 6 at left, 1 at right
+    const inset = 30;
+    const usable = PANEL_W - inset * 2;
+    const t = (6 - stringIdx) / 5; // stringIdx6 -> 0, stringIdx1 -> 1
+    return px + inset + t * usable;
+  }
+
+  // ----- public render ------------------------------------------------------
+  let _shuffleN = 0;
+
+  function buildBoard(prog) {
+    const root = el('g');
+    const ss = prog.stringSet; // [hi,mid,lo]
+    const active = new Set(ss);
+
+    for (let p = 0; p < 4; p++) {
+      const px = panelX(p);
+      const g = el('g', { class: 'panel', 'data-panel': p });
+
+      // panel plate
+      g.appendChild(el('rect', {
+        x: px, y: TOP - 8, width: PANEL_W, height: BOARD_H + 16,
+        rx: 12, fill: 'url(#plate)', stroke: '#1c2130', 'stroke-width': 1
+      }));
+
+      // fret rows (horizontal) — shared identical grid
+      for (let f = 0; f <= FRETS; f++) {
+        const y = TOP + (BOARD_H / FRETS) * f;
+        const isNut = f === 0;
+        g.appendChild(el('line', {
+          x1: px + 14, y1: y, x2: px + PANEL_W - 14, y2: y,
+          stroke: isNut ? '#39415a' : '#161a26',
+          'stroke-width': isNut ? 2.4 : 1
+        }));
+      }
+
+      // strings (vertical) — context faint, active bright
+      for (let s = 6; s >= 1; s--) {
+        const x = stringX(px, s);
+        const on = active.has(s);
+        g.appendChild(el('line', {
+          x1: x, y1: TOP, x2: x, y2: TOP + BOARD_H,
+          stroke: on ? '#2b3550' : '#13161f',
+          'stroke-width': on ? 1.6 : 1,
+          'stroke-linecap': 'round',
+          opacity: on ? 0.95 : 0.45
+        }));
+        if (on) {
+          // subtle glow rail under active string
+          g.appendChild(el('line', {
+            x1: x, y1: TOP, x2: x, y2: TOP + BOARD_H,
+            stroke: '#5eead4', 'stroke-width': 5, opacity: 0.05,
+            filter: 'url(#soft)'
+          }));
+        }
+      }
+
+      // the three voicings for this panel
+      const voicings = panelVoicingsFor(prog, p);
+
+      // background anchor markers: EVERY occurrence of the scale-key root and the
+      // current chord's root across all 6 strings of this 12-fret window, muted
+      // unless the position is part of one of the displayed voicings (§9).
+      drawBackgroundMarkers(g, px, prog, voicings);
+
+      // within-panel position connectors (dim guide lines between the 3 voicings
+      // on the same string, showing the up-neck shift distance == real deltas)
+      drawWithinConnectors(g, px, voicings);
+
+      // draw each voicing
+      voicings.forEach((v, vi) => drawVoicing(g, px, v, vi, voicings.length));
+
+      root.appendChild(g);
+    }
+
+    // cross-panel transition arrows (between chosen voicings)
+    for (let t = 0; t < 3; t++) {
+      const tr = prog.transitions[t];
+      const fromV = chosenVoicing(prog, t);
+      const toV   = chosenVoicing(prog, t + 1);
+      drawTransition(root, t, tr, fromV, toV);
+    }
+
+    return root;
+  }
+
+  // chosen voicing per slot = first of panelVoicings, falling back to prog.voicings
+  function chosenVoicing(prog, slot) {
+    if (prog.panelVoicings && prog.panelVoicings[slot]) return prog.panelVoicings[slot][0];
+    return prog.voicings[slot];
+  }
+  function panelVoicingsFor(prog, slot) {
+    if (prog.panelVoicings && prog.panelVoicings[slot]) return prog.panelVoicings[slot];
+    return [prog.voicings[slot]]; // degrade gracefully to single voicing
+  }
+
+  // ---- background anchor markers -------------------------------------------
+  function m12(n) { return ((n % 12) + 12) % 12; }
+  function openAbsOf(stringIdx) {
+    const T = (window.Fretboard && window.Fretboard.TUNING) || [4, 9, 2, 7, 11, 4];
+    return T[6 - stringIdx]; // stringIdx 1=high E -> T[5]; 6=low E -> T[0]
+  }
+  function diamond(x, y, r) {
+    return `M ${x} ${y - r} L ${x + r} ${y} L ${x} ${y + r} L ${x - r} ${y} Z`;
+  }
+  // Mark EVERY occurrence of the scale-key root (key degree 1) and the current
+  // chord's root across all six strings of the 12-fret window — muted/hollow,
+  // skipped where a displayed voicing note already sits there (§9). Key-root and
+  // chord-root are rendered with distinct shape + hue.
+  function drawBackgroundMarkers(g, px, prog, voicings) {
+    const lead = voicings[0];
+    if (!lead) return;
+    const occupied = new Set();
+    voicings.forEach(v => v.notes.forEach(n => occupied.add(n.stringIdx + ':' + n.fretRel)));
+    let keyRootAbs = null;
+    for (const n of lead.notes) {
+      if (n.keyDegPc != null) { keyRootAbs = m12(openAbsOf(n.stringIdx) + n.fretRel - n.keyDegPc); break; }
+    }
+    if (keyRootAbs == null) return;
+    const rootNote = lead.notes.find(n => n.isRoot);
+    const chordRootPc = rootNote ? rootNote.keyDegPc : null;
+    for (let s = 6; s >= 1; s--) {
+      const oAbs = openAbsOf(s);
+      const x = stringX(px, s);
+      for (let f = 0; f < FRETS; f++) {
+        if (occupied.has(s + ':' + f)) continue;
+        const deg = m12(oAbs + f - keyRootAbs);
+        const isKey = deg === 0;
+        const isChord = !isKey && chordRootPc != null && deg === chordRootPc;
+        if (!isKey && !isChord) continue;
+        const y = fretY(f);
+        if (isKey) {
+          // scale-key root (tonal home) — muted gold hollow diamond
+          g.appendChild(el('path', {
+            d: diamond(x, y, 6), fill: 'none', stroke: '#f5b94a',
+            'stroke-width': 1.2, opacity: 0.34
+          }));
+        } else {
+          // chord root — muted slate-teal hollow ring
+          g.appendChild(el('circle', {
+            cx: x, cy: y, r: 5.2, fill: 'none', stroke: '#5eead4',
+            'stroke-width': 1.2, opacity: 0.26
+          }));
+        }
+      }
+    }
+  }
+
+  // ---- within-panel: dim connector showing the 3 positions up the neck -----
+  function drawWithinConnectors(g, px, voicings) {
+    if (voicings.length < 2) return;
+    // for each active string, connect successive voicings' notes vertically
+    const byString = {};
+    voicings.forEach((v, vi) => v.notes.forEach(n => {
+      (byString[n.stringIdx] = byString[n.stringIdx] || []).push({ vi, fret: n.fretRel });
+    }));
+    Object.keys(byString).forEach(sk => {
+      const pts = byString[sk].sort((a, b) => a.vi - b.vi);
+      const x = stringX(px, +sk);
+      for (let i = 0; i < pts.length - 1; i++) {
+        g.appendChild(el('line', {
+          x1: x, y1: fretY(pts[i].fret), x2: x, y2: fretY(pts[i + 1].fret),
+          stroke: '#2a3350', 'stroke-width': 1, 'stroke-dasharray': '2 5',
+          opacity: 0.5
+        }));
+      }
+    });
+  }
+
+  // ---- a single voicing: dots + labels + within articulation arcs ----------
+  function drawVoicing(parent, px, v, vIndex, total) {
+    if (!v) return;
+    const g = el('g', { class: 'note-grp' });
+    // stagger the pop-in for a lively shuffle
+    g.style.animationDelay = (vIndex * 60) + 'ms';
+
+    // barre underlay if present
+    if (v.barre !== false && v.barre != null) {
+      const ys = fretY(v.barre);
+      const xs = v.notes.filter(n => n.fretRel === v.barre).map(n => stringX(px, n.stringIdx));
+      if (xs.length >= 2) {
+        const x1 = Math.min(...xs), x2 = Math.max(...xs);
+        g.appendChild(el('rect', {
+          x: x1 - 12, y: ys - 9, width: (x2 - x1) + 24, height: 18, rx: 9,
+          fill: 'none', stroke: '#39415a', 'stroke-width': 1.4,
+          'stroke-dasharray': '1 4', opacity: 0.6
+        }));
+      }
+    }
+
+    // dim the non-primary voicings slightly so the chosen (index 0) leads
+    const lead = vIndex === 0;
+    const baseOpacity = lead ? 1 : 0.66;
+
+    v.notes.forEach(n => {
+      const cx = stringX(px, n.stringIdx);
+      const cy = fretY(n.fretRel);
+      const r = lead ? 15 : 13;
+
+      // glow halo for root / lead
+      if (n.isRoot) {
+        g.appendChild(el('circle', {
+          cx, cy, r: r + 7, fill: 'none', stroke: 'var(--root, #ffd479)',
+          'stroke-width': 1.4, opacity: 0.55 * baseOpacity, filter: 'url(#glow)'
+        }));
+      }
+
+      const fill = n.isRoot ? 'url(#gRoot)'
+        : n.outside ? 'url(#gAmber)'
+        : 'url(#gNote)';
+
+      // outside note => dashed amber ring
+      const circle = el('circle', {
+        cx, cy, r,
+        fill, opacity: baseOpacity,
+        stroke: n.outside ? '#ff9d5c' : (n.isRoot ? '#ffd479' : '#5eead4'),
+        'stroke-width': n.outside ? 1.6 : 1,
+        'stroke-dasharray': n.outside ? '3 3' : null,
+        filter: lead ? 'url(#glow)' : null
+      });
+      g.appendChild(circle);
+
+      // keyDeg · chordInt label
+      const txt = el('text', {
+        x: cx, y: cy + 0.5, 'text-anchor': 'middle', 'dominant-baseline': 'central',
+        class: 'note-pair',
+        fill: n.isRoot ? '#1b160a' : (n.outside ? '#241407' : '#04201c'),
+        opacity: baseOpacity
+      });
+      txt.appendChild(document.createTextNode(n.keyDeg + '·' + n.chordInt));
+      g.appendChild(txt);
+    });
+
+    // within-voicing articulation: detect a same-string slot partner one fret away
+    drawWithinArticulations(g, px, v, baseOpacity);
+
+    parent.appendChild(g);
+  }
+
+  // within-voicing articulation opportunities (b3<->3 / b7<->7), straight from
+  // the engine's per-voicing articulation list. Drawn as a small same-string
+  // slur arc with a directional tip — SYMBOL ONLY, never a word.
+  function drawWithinArticulations(g, px, v, op) {
+    const arts = v.articulations || [];
+    arts.forEach(a => {
+      if (!a.fromNote || !a.toNote) return;
+      const s = a.fromNote.stringIdx;
+      const x = stringX(px, s);
+      const y0 = fretY(a.fromNote.fretRel);
+      const y1 = fretY(a.toNote.fretRel);
+      const up = a.direction === 'up' || a.toNote.fretRel > a.fromNote.fretRel;
+      const color = up ? ART_COLOR.hammer : ART_COLOR.pull;
+      const bow = 15;
+      const my = (y0 + y1) / 2;
+      g.appendChild(el('path', {
+        d: `M ${x} ${y0} Q ${x + bow} ${my} ${x} ${y1}`,
+        fill: 'none', stroke: color, 'stroke-width': 1.7,
+        opacity: 0.78 * op, 'marker-end': up ? 'url(#tipUp)' : 'url(#tipDown)',
+        'stroke-linecap': 'round'
+      }));
+    });
+  }
+
+  // ---- cross-panel transition arrow ----------------------------------------
+  function drawTransition(parent, tIndex, tr, fromV, toV) {
+    if (!tr || !fromV || !toV) return;
+    const fromPx = panelX(tIndex);
+    const toPx   = panelX(tIndex + 1);
+    const g = el('g', { class: 'arrow-grp' });
+    g.style.animationDelay = (260 + tIndex * 90) + 'ms';
+
+    const color = ART_COLOR[tr.articulation && tr.articulation.type] || '#7c9cff';
+    const pivots = new Set(tr.pivots || []);
+
+    // build a quick lookup of note frets by string for from/to
+    const fFret = {}, tFret = {};
+    fromV.notes.forEach(n => fFret[n.stringIdx] = n.fretRel);
+    toV.notes.forEach(n => tFret[n.stringIdx] = n.fretRel);
+
+    // one connecting strand per active string between the two panels.
+    // GEOMETRIC FIDELITY: y endpoints are the real fret positions, so the
+    // vertical component of each arrow == the real fret delta.
+    const strings = fromV.stringSet;
+    strings.forEach(s => {
+      const yF = fretY(fFret[s]);
+      const yT = fretY(tFret[s]);
+      const x1 = stringX(fromPx, s);
+      const x2 = stringX(toPx, s);
+      const held = pivots.has(s) || (fFret[s] === tFret[s]);
+
+      if (held) {
+        // pivot / barre held string — dimmed flat tie
+        g.appendChild(el('path', {
+          d: bridge(x1, yF, x2, yT, 0.18),
+          fill: 'none', stroke: '#39415a', 'stroke-width': 1.2,
+          'stroke-dasharray': '1 5', opacity: 0.5
+        }));
+        return;
+      }
+
+      const up = yT < yF; // higher fret = lower y? note: fret increases downward
+      // fret number increases downward, so "up the neck" (higher fret) = larger y.
+      const dirUp = tFret[s] < fFret[s]; // moving toward nut = up-pitch toward open? treat delta sign
+      const marker = (toV && tFret[s] > fFret[s]) ? 'url(#headDown)' : 'url(#headUp)';
+
+      g.appendChild(el('path', {
+        d: bridge(x1, yF, x2, yT, 0.32),
+        fill: 'none', stroke: color, 'stroke-width': 2.2,
+        opacity: 0.92, 'marker-end': marker, 'stroke-linecap': 'round',
+        filter: 'url(#soft)'
+      }));
+      // crisp top stroke
+      g.appendChild(el('path', {
+        d: bridge(x1, yF, x2, yT, 0.32),
+        fill: 'none', stroke: color, 'stroke-width': 1.4, opacity: 0.95,
+        'marker-end': marker, 'stroke-linecap': 'round'
+      }));
+    });
+
+    // articulation indicator at midpoint of the gutter — SYMBOL ONLY (no words):
+    // a small colored glyph keyed to articulation type; ⚡ flags slide-into-hammer.
+    const midX = (panelX(tIndex) + PANEL_W + panelX(tIndex + 1)) / 2;
+    const badgeY = TOP - 22;
+    const dirUp = tr.direction === 'up';
+    const glyph = ART_GLYPH[tr.articulation && tr.articulation.type] || '→';
+    const sym = (tr.slideIntoHammer ? '⚡' : '') + glyph + (dirUp ? '↑' : '↓');
+    const badge = el('g', {});
+    badge.appendChild(el('circle', {
+      cx: midX, cy: badgeY, r: 12,
+      fill: 'rgba(10,13,20,.82)', stroke: color, 'stroke-width': 1.2, opacity: 0.95
+    }));
+    const bt = el('text', {
+      x: midX, y: badgeY + 0.5, 'text-anchor': 'middle', 'dominant-baseline': 'central',
+      fill: color, style: 'font:600 11px system-ui'
+    });
+    bt.appendChild(document.createTextNode(sym));
+    badge.appendChild(bt);
+    g.appendChild(badge);
+
+    parent.appendChild(g);
+  }
+
+  // a smooth horizontal-leaning bezier from (x1,y1) to (x2,y2); k = curvature
+  function bridge(x1, y1, x2, y2, k) {
+    const dx = (x2 - x1);
+    const c1x = x1 + dx * (0.45 + k * 0.0);
+    const c2x = x2 - dx * (0.45 + k * 0.0);
+    return `M ${x1} ${y1} C ${c1x} ${y1}, ${c2x} ${y2}, ${x2} ${y2}`;
+  }
+
+  // ---- svg defs: gradients, glows, arrowheads ------------------------------
+  function buildDefs() {
+    const defs = el('defs');
+
+    const plate = el('linearGradient', { id: 'plate', x1: 0, y1: 0, x2: 0, y2: 1 });
+    plate.appendChild(el('stop', { offset: '0%', 'stop-color': '#10131c' }));
+    plate.appendChild(el('stop', { offset: '100%', 'stop-color': '#0a0c13' }));
+    defs.appendChild(plate);
+
+    function radial(id, c0, c1) {
+      const rg = el('radialGradient', { id, cx: '38%', cy: '32%', r: '75%' });
+      rg.appendChild(el('stop', { offset: '0%', 'stop-color': c0 }));
+      rg.appendChild(el('stop', { offset: '100%', 'stop-color': c1 }));
+      defs.appendChild(rg);
+    }
+    radial('gNote', '#8af6e4', '#2bbfa8');   // teal note
+    radial('gRoot', '#ffe6a8', '#f5b94a');   // gold root
+    radial('gAmber', '#ffc28f', '#ff8a45');  // amber outside
+
+    // soft blur
+    const soft = el('filter', { id: 'soft', x: '-50%', y: '-50%', width: '200%', height: '200%' });
+    soft.appendChild(el('feGaussianBlur', { stdDeviation: 2.4 }));
+    defs.appendChild(soft);
+
+    // glow
+    const glow = el('filter', { id: 'glow', x: '-80%', y: '-80%', width: '260%', height: '260%' });
+    glow.appendChild(el('feGaussianBlur', { stdDeviation: 3.2, result: 'b' }));
+    const merge = el('feMerge');
+    merge.appendChild(el('feMergeNode', { in: 'b' }));
+    merge.appendChild(el('feMergeNode', { in: 'SourceGraphic' }));
+    glow.appendChild(merge);
+    defs.appendChild(glow);
+
+    // arrowheads
+    function head(id, color, flip) {
+      const m = el('marker', {
+        id, viewBox: '0 0 10 10', refX: 8, refY: 5,
+        markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse'
+      });
+      m.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: color }));
+      defs.appendChild(m);
+    }
+    head('headUp', '#7c9cff');
+    head('headDown', '#7c9cff');
+    // small within-voicing tips
+    function tip(id, color) {
+      const m = el('marker', {
+        id, viewBox: '0 0 10 10', refX: 6, refY: 5,
+        markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse'
+      });
+      m.appendChild(el('path', { d: 'M 0 1 L 8 5 L 0 9', fill: 'none', stroke: color, 'stroke-width': 1.6 }));
+      defs.appendChild(m);
+    }
+    tip('tipUp', ART_COLOR.hammer);
+    tip('tipDown', ART_COLOR.pull);
+
+    return defs;
+  }
+
+  // ---- top-level boot ------------------------------------------------------
+  const App = {
+    db: null,
+    seed: 1,
+    chaos: 0,
+    prog: null,
+
+    init(mountId) {
+      this.mount = document.getElementById(mountId);
+      // SPEC §9: database always built full
+      this.db = window.Fretboard.build({ fourNote: true, viiMajor: true });
+      this.wireControls();
+      this.draw();
+    },
+
+    wireControls() {
+      const shuffleBtn = document.getElementById('shuffle');
+      const chaos = document.getElementById('chaos');
+      const chaosVal = document.getElementById('chaosVal');
+      shuffleBtn.addEventListener('click', () => {
+        this.seed += 1;        // increment seed (SPEC §9)
+        this.draw();
+      });
+      chaos.addEventListener('input', () => {
+        this.chaos = (+chaos.value) / 100;
+        chaosVal.textContent = this.chaos.toFixed(2);
+        this.draw();
+      });
+    },
+
+    draw() {
+      this.prog = window.Fretboard.progression(this.db, { chaos: this.chaos, seed: this.seed });
+      this.render(this.prog);
+      this.renderMeta(this.prog);
+    },
+
+    render(prog) {
+      const svg = el('svg', {
+        id: 'stage', viewBox: `0 0 ${STAGE_W} ${STAGE_H}`,
+        preserveAspectRatio: 'xMidYMid meet', class: 'fade-in'
+      });
+      svg.appendChild(buildDefs());
+      svg.appendChild(buildBoard(prog));
+      this.mount.innerHTML = '';
+      this.mount.appendChild(svg);
+    },
+
+    renderMeta(prog) {
+      const seq = document.getElementById('seqChips');
+      const ssEl = document.getElementById('ssChip');
+      const seedEl = document.getElementById('seedChip');
+      const cb = document.getElementById('commonBar');
+      if (seq) {
+        seq.textContent = prog.chords.map(c => degSym(c)).join('  →  ');
+      }
+      if (ssEl) ssEl.textContent = prog.stringSet.join('-');
+      if (seedEl) seedEl.textContent = this.seed;
+      if (cb) cb.style.transform = 'scaleX(' + (prog.commonness || 0) + ')';
+    }
+  };
+
+  function degSym(d) {
+    return d === 7 || d === 'VII' ? 'VII' : String(d);
+  }
+
+  window.FretboardUI = App;
+})();
+
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    window.FretboardUI.init('stage-mount');
+  });
+</script>
+</body>
+</html>
